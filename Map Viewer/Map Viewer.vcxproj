@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{34B0473D-8816-4522-9F49-0F1F6DF31D5B}</ProjectGuid>
+    <RootNamespace>MapViewer</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>E:\Documents and Settings\Eigenaar\Mijn documenten\rose\erose\Custom client\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Documents and Settings\Eigenaar\Mijn documenten\rose\erose\Custom client\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>E:\Documents and Settings\Eigenaar\Mijn documenten\rose\erose\Custom client\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/IGNORE:4204 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;..\Debug\RNEd.lib;..\Debug\R3Ed.lib;..\Debug\RGEd.lib;..\Debug\RECommond.lib;..\Libraries\lib\ticppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Array.hpp" />
+    <ClInclude Include="Avatar.hpp" />
+    <ClInclude Include="Character.hpp" />
+    <ClInclude Include="CharacterList.hpp" />
+    <ClInclude Include="CharacterSelectDialog.hpp" />
+    <ClInclude Include="ChatDialog.hpp" />
+    <ClInclude Include="Colour.hpp" />
+    <ClInclude Include="CriticalSection.hpp" />
+    <ClInclude Include="DialogType.hpp" />
+    <ClInclude Include="EventQueue.hpp" />
+    <ClInclude Include="Fonts.hpp" />
+    <ClInclude Include="GameEvent.hpp" />
+    <ClInclude Include="GameEvents.hpp" />
+    <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="InGameState.hpp" />
+    <ClInclude Include="LoadState.hpp" />
+    <ClInclude Include="LoginDialog.hpp" />
+    <ClInclude Include="LoginState.hpp" />
+    <ClInclude Include="MD5.hpp" />
+    <ClInclude Include="Monster.hpp" />
+    <ClInclude Include="MsgBox.hpp" />
+    <ClInclude Include="Network.hpp" />
+    <ClInclude Include="Npc.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="RoseConstants.hpp" />
+    <ClInclude Include="RoseStructs.hpp" />
+    <ClInclude Include="ServerListDialog.hpp" />
+    <ClInclude Include="String.hpp" />
+    <ClInclude Include="TitanFileSystem.hpp" />
+    <ClInclude Include="ToolTip.hpp" />
+    <ClInclude Include="UserInterface.hpp" />
+    <ClInclude Include="Window.hpp" />
+    <ClInclude Include="Windows.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Avatar.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterSelectDialog.cpp" />
+    <ClCompile Include="ChatDialog.cpp" />
+    <ClCompile Include="InGameState.cpp" />
+    <ClCompile Include="LoadState.cpp" />
+    <ClCompile Include="LoginDialog.cpp" />
+    <ClCompile Include="LoginState.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MsgBox.cpp" />
+    <ClCompile Include="ServerListDialog.cpp" />
+    <ClCompile Include="ToolTip.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R3E\R3E.vcxproj">
+      <Project>{b4f8f232-e6b7-4891-9aa9-7585b1fc448b}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\RECommon\RECommon.vcxproj">
+      <Project>{69ab56cf-5401-426d-935b-b880d316dbce}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\RGE\RGE.vcxproj">
+      <Project>{23e9b773-00e7-47a0-8d8b-34e23bfd34d2}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\RNE\RNE.vcxproj">
+      <Project>{adeb3767-aebe-4ada-88dd-78e2d21f530e}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

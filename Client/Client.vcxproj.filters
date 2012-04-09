@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c58adf8f-f121-472a-93dd-10c82c1a7dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{abee6d75-8549-42da-b39a-d5359a7c7f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{47fedf6a-66f9-4ef6-b6ee-27219d10246b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{47ade549-3c43-42ce-b3c7-37183d3e9f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Array.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Colour.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CriticalSection.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MD5.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="RoseConstants.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="RoseStructs.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="String.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="TitanFileSystem.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterList.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameState.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadState.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginState.hpp">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectDialog.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatDialog.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogType.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginDialog.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgBox.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerListDialog.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolTip.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.hpp">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Fonts.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvents.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerVfs.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgBox.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerListDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolTip.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{99332698-fd59-40d3-bf72-f884152ebb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{13c619a0-e6ce-4a66-8761-29feb199ad9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{903e92e8-6343-411e-8d3c-316ec5ebab04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{155a544d-b255-4c2c-bec1-fe6e2f676358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{c1b199f0-a368-4f99-889f-ffd7f6fc2ad5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Crypt.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketHandlers.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Crypt.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.hpp">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkManager.hpp">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CriticalSection.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="RoseConstants.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="RoseStructs.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="String.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectEvent.hpp">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkEvent.hpp">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketEvents.hpp">
+      <Filter>Events</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
