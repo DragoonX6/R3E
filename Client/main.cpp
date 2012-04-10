@@ -53,7 +53,7 @@ int __cdecl main(int, char**){
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
 
-	BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvDATA");
+	BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 	BufferedFileSystem::SetFileSystem(fs);
 
 	gWindow->SetSize(1024, 768);

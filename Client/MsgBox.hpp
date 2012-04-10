@@ -27,6 +27,7 @@ public:
 
 	void SetButtons(int buttons);
 	void SetMessage(const char* message);
+	void SetMessageDuo(const char* message1, const char* message2);
 
 private:
 	Button* mButtonOK;

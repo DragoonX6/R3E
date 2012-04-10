@@ -118,6 +118,21 @@ void UserInterface::ShowMsgBox(const char* msg, int buttons){
 	mMsgBox->SetPosition(Point(x, y));
 }
 
+void UserInterface::ShowMsgBoxDuo(const char* msg1,  const char* msg2, int buttons){
+	if(!mMsgBox)
+		mMsgBox = MsgBox::Create();
+	
+	UiState::mModal = mMsgBox;
+	mMsgBox->SetMessageDuo(msg1, msg2);
+	mMsgBox->SetButtons(buttons);
+	mMsgBox->SetVisible(true);
+
+	int x = (gWindow->Width() - mMsgBox->SizeX()) / 2;
+	int y = (gWindow->Height() - mMsgBox->SizeY()) / 2;
+
+	mMsgBox->SetPosition(Point(x, y));
+}
+
 void UserInterface::HideMsgBox(){
 	if(!mMsgBox) return;
 	mMsgBox->SetVisible(false);

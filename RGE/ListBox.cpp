@@ -105,7 +105,8 @@ void ListBox::Clear(){
 	mItems.Clear();
 }
 
-void ListBox::SetItem(int idx, const char* text){
+void ListBox::SetItem(int idx, const char* text)
+{
 	ListItem* item = &mItems[idx];
 	item->mValue = text;
 	item->mText->SetText(text);

@@ -1,4 +1,5 @@
 #include <xmemory>
+#include <exception>
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC

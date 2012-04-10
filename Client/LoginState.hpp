@@ -46,6 +46,7 @@ static const char* gLoginStrs[] = {
 	"Incorrect version",
 	"Server busy (2)",
 	"Show only worldserver",
+	"is not supported",
 	0
 };
 

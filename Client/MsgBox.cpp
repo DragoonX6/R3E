@@ -110,55 +110,79 @@ void MsgBox::SetButtons(int buttons){
 }
 
 void MsgBox::SetMessage(const char* message){
-	int messageSize = strlen(message);
-	if(messageSize > 21)
-	{
-		char *newstr; // our new string
-		int i, x;
-		for(i = 0, x = 0; i <= messageSize; i++)
+	/*try{
+		int messageSize = strlen(message);
+		if(messageSize >= 21)
 		{
-			if(newstr[i] == 0x20 &&  i >= 15 && x == 0) //try one to find a space after 15 chars
+			char *newstr; // our new string
+			int i, x;
+			for(i = 0, x = 0; i <= messageSize; i++)
 			{
-				break;
+				if(message[i] == 0x20 &&  i >= 15 && x == 0) //try one to find a space after 15 chars
+				{
+					break;
+				}
+				else if(message[i] == 0x20 && i >= 10 && x == 1) // try 2 to find a space after 10 chars
+				{
+					break;
+				}
+				else if(message[i] == 0x20 && i >= 5 && x == 2) // try 3 to find a space after 5 chars
+				{
+					break;
+				}
+				else if(message[i] == 0x20 && x == 3) // if the last 3 didn't do it stop at any space
+				{
+					break;
+				}
+				else if(i == messageSize) // if one the first 3 if's failed
+				{
+					x++;
+					i = 0;
+				}
 			}
-			else if(newstr[i] == 0x20 && i >= 10 && x == 1) // try 2 to find a space after 10 chars
-			{
-				break;
-			}
-			else if(newstr[i] == 0x20 && i >= 5 && x == 2) // try 3 to find a space after 5 chars
-			{
-				break;
-			}
-			else if(newstr[i] == 0x20 && x == 3) // if the last 3 didn't do it stop at any space
-			{
-				break;
-			}
-			else // if one the first 3 if's failed
-			{
-				x++;
-				i = 0;
-			}
+			messageSize -= i; // make it the size of the last x chars
+			newstr = new char[messageSize]; // allocate a runtime set memory
+			memset(newstr, 0, messageSize);
+			char *tempstr = new char[messageSize]; // make a temp string and allocate the memory at runtime
+			memset(tempstr, 0, messageSize); // clear the string just to be shure
+			memmove(tempstr+0, message+i, messageSize); // move the end of the string in a new string
+			tempstr[messageSize] = 0; // make our string zero terminated
+			strcpy(newstr, tempstr); //copy the temp string to our new string
+			memmove(tempstr+0, message+0, i); // move the begin of the string in a new string
+			tempstr[i] = 0; //make our string zero terminated
+			message = tempstr; // remake the message
+			//SAFE_DELETE_ARRAY(tempstr); // delete the temp string
+			//strncpy(tempstr, message, messageSize);
+			mListBox->SetItem(0, message); // set the first string
+			mListBox->SetItem(1, newstr); // set the second string
 		}
-		messageSize -= i; // make it the size of the last x chars
-		newstr = new char[messageSize]; // allocate a runtime set memory
-		char *tempstr = new char[messageSize]; // make a temp string and allocate the memory at runtime
-		for(int j = 0; j <= messageSize; j++) // clear the string just to be shure
+		else
 		{
-			tempstr[i] = 0x00;
+			mListBox->SetItem(0, message);
 		}
-		memmove(tempstr+0, message+i, messageSize); // move the end of the string in a new string
-		strcpy(newstr, tempstr);
-		memmove(tempstr+0, message+0, messageSize); // move the begin of the string in a new string
-		message = tempstr; // remake the message
-		SAFE_DELETE_ARRAY(tempstr); // delete the temp string
-		//strncpy(tempstr, message, messageSize);
-		mListBox->SetItem(0, message); // set the first string
-		mListBox->SetItem(1, newstr); // set the second string
 	}
-	else
+	catch(std::exception& e)
 	{
-		mListBox->SetItem(0, message);
-	}
+		OutputDebugString(e.what());
+	}*/
+	mListBox->SetItem(0, message);
+
+	int bottom = mImageTop->SizeY() + (mImageMiddle->SizeY() * mListBox->ItemCount());
+	mImageBottom->SetPositionY(bottom);
+
+	int halfBtm = mImageBottom->SizeY() / 2;
+	bottom += halfBtm;
+	mButtonOK->SetPositionY(bottom - (mButtonOK->SizeY() / 2));
+	mButtonCancel->SetPositionY(bottom - (mButtonCancel->SizeY() / 2));
+
+	bottom += halfBtm;
+	SetSizeY(bottom);
+}
+
+void MsgBox::SetMessageDuo(const char* message1, const char* message2){
+	mListBox->SetItem(0, message1);
+	//mListBox->SetItem(0, message2);
+	mListBox->AddItem(message2);
 
 	int bottom = mImageTop->SizeY() + (mImageMiddle->SizeY() * mListBox->ItemCount());
 	mImageBottom->SetPositionY(bottom);
