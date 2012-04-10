@@ -45,8 +45,7 @@ static const char* gLoginStrs[] = {
 	"Email address unconfirmed",
 	"Incorrect version",
 	"Server busy (2)",
-	"Show only worldserver",
-	"is not supported",
+	"Show only worldserver is not supported",
 	0
 };
 

@@ -121,8 +121,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 					evt->mResult = 1;
 				else if(evt->mResult == LOGIN_UNSUPPORTED)
 				{
-					//gInterface->ShowMsgBox(gLoginStrs[12], MsgBox::BUTTON_OK);
-					gInterface->ShowMsgBoxDuo(gLoginStrs[12], gLoginStrs[13], MsgBox::BUTTON_OK);
+					gInterface->ShowMsgBox(gLoginStrs[12], MsgBox::BUTTON_OK);
 					gNetwork->Disconnect(1);
 					return 0;
 				}

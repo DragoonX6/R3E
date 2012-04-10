@@ -110,7 +110,7 @@ void MsgBox::SetButtons(int buttons){
 }
 
 void MsgBox::SetMessage(const char* message){
-	/*try{
+	try{
 		int messageSize = strlen(message);
 		if(messageSize >= 21)
 		{
@@ -141,20 +141,18 @@ void MsgBox::SetMessage(const char* message){
 				}
 			}
 			messageSize -= i; // make it the size of the last x chars
-			newstr = new char[messageSize]; // allocate a runtime set memory
+			newstr = new char[messageSize];
 			memset(newstr, 0, messageSize);
-			char *tempstr = new char[messageSize]; // make a temp string and allocate the memory at runtime
-			memset(tempstr, 0, messageSize); // clear the string just to be shure
+			char *tempstr = new char[messageSize];
+			memset(tempstr, 0, messageSize); // clear the string
 			memmove(tempstr+0, message+i, messageSize); // move the end of the string in a new string
 			tempstr[messageSize] = 0; // make our string zero terminated
-			strcpy(newstr, tempstr); //copy the temp string to our new string
-			memmove(tempstr+0, message+0, i); // move the begin of the string in a new string
-			tempstr[i] = 0; //make our string zero terminated
-			message = tempstr; // remake the message
-			//SAFE_DELETE_ARRAY(tempstr); // delete the temp string
-			//strncpy(tempstr, message, messageSize);
-			mListBox->SetItem(0, message); // set the first string
-			mListBox->SetItem(1, newstr); // set the second string
+			strcpy(newstr, tempstr);
+			memmove(tempstr+0, message+0, i);
+			tempstr[i] = 0;
+			message = tempstr;
+			mListBox->SetItem(0, message);
+			mListBox->AddItem(newstr);
 		}
 		else
 		{
@@ -164,25 +162,8 @@ void MsgBox::SetMessage(const char* message){
 	catch(std::exception& e)
 	{
 		OutputDebugString(e.what());
-	}*/
+	}
 	mListBox->SetItem(0, message);
-
-	int bottom = mImageTop->SizeY() + (mImageMiddle->SizeY() * mListBox->ItemCount());
-	mImageBottom->SetPositionY(bottom);
-
-	int halfBtm = mImageBottom->SizeY() / 2;
-	bottom += halfBtm;
-	mButtonOK->SetPositionY(bottom - (mButtonOK->SizeY() / 2));
-	mButtonCancel->SetPositionY(bottom - (mButtonCancel->SizeY() / 2));
-
-	bottom += halfBtm;
-	SetSizeY(bottom);
-}
-
-void MsgBox::SetMessageDuo(const char* message1, const char* message2){
-	mListBox->SetItem(0, message1);
-	//mListBox->SetItem(0, message2);
-	mListBox->AddItem(message2);
 
 	int bottom = mImageTop->SizeY() + (mImageMiddle->SizeY() * mListBox->ItemCount());
 	mImageBottom->SetPositionY(bottom);

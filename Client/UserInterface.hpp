@@ -34,7 +34,6 @@ public:
 	int HandleEvent(UINT uiMsg, WPARAM wParam, LPARAM lParam);
 
 	void ShowMsgBox(const char* msg, int buttons);
-	void ShowMsgBoxDuo(const char* msg1, const char* msg2, int buttons);
 	void HideMsgBox();
 
 private:
