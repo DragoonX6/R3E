@@ -7,7 +7,8 @@
 #include "SmartPointer.hpp"
 #include <time.h>
 
-class SkeletalEntity : public EntityGroup {
+class SkeletalEntity : public EntityGroup
+{
 private:
 	struct BoundEntity {
 		Entity* mEntity;
@@ -30,6 +31,9 @@ public:
 	void PauseAnimation();
 	void ResumeAnimation();
 	void SetFrame(int frame);
+
+	void PauseAnimationAtLoop(int x);
+	int GetNbLoopDone();
 
 	void BindEntityToBone(Entity* entity, int bone);
 	void BindEntityToDummy(Entity* entity, int boneID);
@@ -57,6 +61,9 @@ private:
 	Array<Matrix4>* mBoneMatricesAbs;
 
 	Array<BoundEntity> mBoundEntities;
+
+	int nb_loops;
+	int max_loops;
 };
 
 #endif

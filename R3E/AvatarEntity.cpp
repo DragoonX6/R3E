@@ -64,6 +64,16 @@ void AvatarEntity::SetAvatarState(int state){
 	UpdateAnimationType();
 }
 
+void AvatarEntity::SetAvatarSelect()
+{
+	SmartPointer<ROSE::ZMO> anim = MotionManager::Instance().LoadMotionSelect();
+	if(anim == NULL)
+	{
+		return;
+	}
+	SetAnimation(anim);
+}
+
 void AvatarEntity::SetHairStyle(int style){
 	mHairStyle = style;
 	UpdateHair();
@@ -77,6 +87,10 @@ void AvatarEntity::UpdateAnimationType(){
 	int weapon = 0;
 	if(mItemEntities[IT_WEAPON]) weapon = mItemEntities[IT_WEAPON]->mID;
 	SmartPointer<ROSE::ZMO> anim = MotionManager::Instance().LoadMotion(weapon, mAvatarState, mGender);
+	if(anim == NULL)
+	{
+		return;
+	}
 	SetAnimation(anim);
 }
 

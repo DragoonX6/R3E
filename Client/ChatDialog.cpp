@@ -57,7 +57,16 @@ void ChatDialog::OnCreated(){
 int ChatDialog::HandleEvent(KeyboardEvent* evt){
 	int ret = Dialog::HandleEvent(evt);
 	if(ret == mEditBox->ID() && evt->type == KEY_UP && evt->key == VK_RETURN)
-		SendChatMessage();
+	{
+		if(UiState::mFocus != mEditBox)
+		{
+			mEditBox->SetFocus(true);
+		}
+		else
+		{
+			SendChatMessage();
+		}
+	}
 
 	return ret;
 }

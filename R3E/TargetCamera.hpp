@@ -74,7 +74,8 @@ public:
 
 	void AddDistance(float dist){
 		mDistance += dist;
-		if(mDistance < 1.0f) mDistance = 1.0f;
+		if(mDistance < 2.5f) mDistance = 2.5f;
+		if(mDistance >= 40.0f) mDistance = 40.0f;
 		mHasChanges = true;
 	}
 

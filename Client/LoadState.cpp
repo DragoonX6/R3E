@@ -5,10 +5,13 @@
 #include "LoadState.hpp"
 #include "UserInterface.hpp"
 #include "CharacterList.hpp"
+#include "Window.hpp"
 
 #include "..\R3E\RoseData.hpp"
 #include "..\R3E\MapManager.hpp"
 #include "..\R3E\SceneManager.hpp"
+#include "..\RECommon\BufferedFileSystem.hpp"
+#include "..\R3E\STB.hpp"
 
 LoadState::LoadState(int map){
 	mLoadMap = map;
@@ -44,7 +47,58 @@ int LoadState::HandleEvent(NetworkEvent* /*nevt*/){
 
 int LoadState::Run(){
 	static bool sFirstLoad = true;
+	Texture ldscreen;
+	ROSE::STB loadstb;
+	char loadstr[MAX_PATH];
+	int ranval = 0;
+	int rows = 0;
+
+	strcpy_s(loadstr, "3DDATA\\STB\\LIST_LOADING.STB");
+
+	while(1)
+	{
+		if(sFirstLoad)
+		{
+			ldscreen.Load("3DDATA\\CONTROL\\RES\\EXUI1.DDS");
+			break;
+		}
+		else
+		{
+			loadstb.Load(loadstr);
+			rows = loadstb.Rows();
+			srand(time(NULL));
+			ranval = rand() % rows;
+
+			memset(loadstr, 0, sizeof(loadstr));
+			strcpy_s(loadstr, loadstb.GetString(ranval, 0));
+			if(strcmp(loadstr, ""))
+			{
+				ldscreen.Load(loadstr);
+				break;
+			}
+		}
+	}
+
+	glMatrixMode (GL_MODELVIEW);
+	glPushMatrix ();
+	glLoadIdentity ();
+	glMatrixMode (GL_PROJECTION);
+	glPushMatrix ();
+	glLoadIdentity ();
+
+	glBegin (GL_QUADS);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+	glEnd ();
+
+	glPopMatrix ();
+	glMatrixMode (GL_MODELVIEW);
+	glPopMatrix ();
 	
+	gWindow->SwapBuffers();
+
 	if(sFirstLoad){
 		gScene->Init();
 

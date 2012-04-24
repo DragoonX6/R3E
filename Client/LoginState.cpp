@@ -20,7 +20,7 @@
 #include "..\R3E\ResourceManager.hpp"
 
 LoginState::LoginState()
-  : mLoginDialog(0), mCamera(0), mWaitCameraFinish(0), mCurMsgBoxSrv(LS), mSelectedCharacter(-1), mRenderCharacterTips(false)
+	: mLoginDialog(0), mCamera(0), mWaitCameraFinish(0), mCurMsgBoxSrv(LS), mSelectedCharacter(-1), mRenderCharacterTips(false)
 {
 }
 
@@ -34,9 +34,9 @@ bool LoginState::CanEnterState(){
 void LoginState::EnterState(){
 	mVersionText.SetFont(FontList::Instance().GetFont(FONT_NORMAL_OUTLINE));
 	mVersionText.SetText("A lovely ROSE client by ExJam");
-/*#ifdef _DEBUG
+	/*#ifdef _DEBUG
 	dbgTxt.SetFont(FontList::Instance().GetFont(FONT_NORMAL_OUTLINE));
-#endif*/
+	#endif*/
 
 	mLoginDialog = (LoginDialog*)gInterface->FindDialog(DLG_LOGIN);
 	mServerListDialog = (ServerListDialog*)gInterface->FindDialog(DLG_SERVER_LIST);
@@ -66,10 +66,10 @@ bool LoginState::LeaveState(){
 
 int LoginState::HandleEvent(NetworkEvent* nevt){
 	switch(nevt->_evt_type){
-		case NET_DISCONNECT:
-			gInterface->ShowMsgBox("Disconnected from server!", MsgBox::BUTTON_OK);
+	case NET_DISCONNECT:
+		gInterface->ShowMsgBox("Disconnected from server!", MsgBox::BUTTON_OK);
 		break;
-		case NET_CONNECT_RESULT:
+	case NET_CONNECT_RESULT:
 		{
 			ConnectEvent* evt = (ConnectEvent*)nevt;
 			if(!evt->mSuccess){
@@ -97,7 +97,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			}
 		}
 		break;
-		case NET_PAK_NET_STATUS:
+	case NET_PAK_NET_STATUS:
 		{
 			PakNetStatusEvent* evt = (PakNetStatusEvent*)nevt;
 			if(evt->mStatus != 2){
@@ -113,7 +113,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			gNetwork->SendPacket(LS, &pakout);
 		}
 		break;
-		case NET_PAK_LOGIN_RESULT:
+	case NET_PAK_LOGIN_RESULT:
 		{
 			PakLoginResultEvent* evt = (PakLoginResultEvent*)nevt;
 			if(evt->mResult != LOGIN_OK){
@@ -127,9 +127,9 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 				}
 				else
 				{
-				gInterface->ShowMsgBox(gLoginStrs[evt->mResult], MsgBox::BUTTON_OK);
-				gNetwork->Disconnect(1);
-				return 0;
+					gInterface->ShowMsgBox(gLoginStrs[evt->mResult], MsgBox::BUTTON_OK);
+					gNetwork->Disconnect(1);
+					return 0;
 				}
 			}
 
@@ -148,17 +148,17 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 				RequestChannelList(evt->mServers[0].mID);
 		}
 		break;
-		case NET_PAK_CHANNEL_LIST:
+	case NET_PAK_CHANNEL_LIST:
 		{
 			PakChannelListEvent* evt = (PakChannelListEvent*)nevt;
-		
+
 			mServerListDialog->mChannelList->SetSelected(0);
 			mServerListDialog->ClearChannels();
 			for(unsigned int i = 0; i < evt->mChannels.Size(); ++i)
 				mServerListDialog->AddChannel(evt->mServer, &evt->mChannels[i]);
 		}
 		break;
-		case NET_PAK_SELECT_SERVER:
+	case NET_PAK_SELECT_SERVER:
 		{
 			PakSelectServerEvent* evt = (PakSelectServerEvent*)nevt;
 
@@ -172,7 +172,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			}
 		}
 		break;
-		case NET_PAK_SERVER_JOIN:
+	case NET_PAK_SERVER_JOIN:
 		{
 			PakServerJoinEvent* evt = (PakServerJoinEvent*)nevt;
 			if(evt->mResult != JOIN_OK){
@@ -190,7 +190,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			}
 		}
 		break;
-		case NET_PAK_CHARACTER_LIST:
+	case NET_PAK_CHARACTER_LIST:
 		{
 			PakCharacterListEvent* evt = (PakCharacterListEvent*)nevt;
 
@@ -218,7 +218,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 				avatar->mClass = chr->mClass;
 				avatar->mDeleteTime = chr->mDeleteTime;
 				avatar->mIsPlatinum = chr->mIsPlatinum;
-				
+
 				ToolTip* tip = new ToolTip();
 				avatar->mToolTip = tip;
 				tip->AddLine(avatar->mName, 0, Colour::Yellow, ALIGN_CENTER);
@@ -227,7 +227,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 				{
 				case 0:
 					{
-					avatar->mClassName = "Visitor";
+						avatar->mClassName = "Visitor";
 					}break;
 				case 111:
 					{
@@ -294,7 +294,7 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			}
 		}
 		break;
-		case NET_PAK_GAME_SERVER_IP:
+	case NET_PAK_GAME_SERVER_IP:
 		{
 			PakGameServerIPEvent* evt = (PakGameServerIPEvent*)nevt;
 			mUserID = evt->mUserID;
@@ -303,10 +303,10 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 			gInterface->ShowMsgBox("Connecting...", MsgBox::BUTTON_CANCEL);
 		}
 		break;
-		case NET_PAK_PLAYER_DATA:
+	case NET_PAK_PLAYER_DATA:
 		{
 			PakPlayerDataEvent* evt = (PakPlayerDataEvent*)nevt;
-			
+
 			printf("Join map %d Position: %f %f\n", evt->mData->mZone, evt->mData->mPosition);
 			SAFE_DELETE(gPlayer);
 
@@ -332,8 +332,12 @@ int LoginState::HandleEvent(NetworkEvent* nevt){
 
 void LoginState::SetSelectedCharacter(unsigned int idx){
 	mSelectedCharacter = idx;
-	mAvatars[mSelectedCharacter].mEntity->SetAvatarState(AVT_ANI_JUMP1);
-	for(unsigned int i = 0; i < mAvatars.Size(); ++i){
+	//mAvatars[mSelectedCharacter].mEntity->SetAvatarSelect();
+	SmartPointer<ROSE::ZMO> ann = ANIM_MGR().Load("3DDATA\\MOTION\\AVATAR\\EMOTION_GREETING_M1.ZMO");
+	mAvatars[mSelectedCharacter].mEntity->SetAnimation(ann);
+	//mAvatars[mSelectedCharacter].mEntity->PauseAnimationAtLoop(1);
+	for(unsigned int i = 0; i < mAvatars.Size(); ++i)
+	{
 		if(i == idx) continue;
 		mAvatars[i].mEntity->SetState(STATE_STOP);
 	}
@@ -342,7 +346,7 @@ void LoginState::SetSelectedCharacter(unsigned int idx){
 int LoginState::HandleEvent(GuiEvent* gevt){
 	if(gevt->_evt_type == EVT_WINDOW && mLoginDialog){
 		WindowEvent* evt = (WindowEvent*)gevt;
-		
+
 		mLoginDialog->SetPositionX(evt->width - mLoginDialog->SizeX() - 50);
 		mLoginDialog->SetPositionY(100);
 		return 0;
@@ -419,7 +423,7 @@ int LoginState::HandleEvent(GameEvent* gevt){
 		else{
 			selected_avatar=mSelectedCharacter;
 		}
-		
+
 		Packet pakout(0x715);
 		//pakout.AddVal<char>(char(evt->mCharacterIdx));
 		pakout.AddVal<char>(selected_avatar);
@@ -436,6 +440,7 @@ int LoginState::HandleEvent(GameEvent* gevt){
 		if(evt->mStatus == MsgBox::BUTTON_CANCEL)
 			gNetwork->Disconnect(mCurMsgBoxSrv);
 	}else if(gevt->_evt_type == GE_QUIT){
+		//mActive = false;
 		gWindow->Close();
 	}
 
@@ -455,28 +460,36 @@ int LoginState::Run(){
 		gScene->BeginScene();
 		gScene->RenderScene();
 		gScene->EndScene();
-		
+
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1.0f, 1.0f, 1.0f);
 
 		gScene->Begin2D();
 		mVersionText.Render();
-/*#ifdef _DEBUG
+		/*#ifdef _DEBUG
 		dbgTxt.SetTextEx("cam pos: %i", mCamera->GetCameraPosition());
 		dbgTxt.Render();
-#endif*/
+		#endif*/
 		gInterface->Render();
 
-		if(mRenderCharacterTips && mSelectedCharacter != -1){
-			SelectAvatar* avatar = &mAvatars[mSelectedCharacter];
-			Vector3 wpos = avatar->mEntity->GetPosition();
-			wpos.z += avatar->mEntity->GetEntityHeight();
-			Vector3 vpos = gScene->GetScreenPosition(wpos);
-			Point pos(int(vpos.x), int(vpos.y));
-			pos.x -= avatar->mToolTip->SizeX() / 2;
-			pos.y -= avatar->mToolTip->SizeY();
-			avatar->mToolTip->SetPosition(pos);
-			avatar->mToolTip->Render();
+		try
+		{
+			if(mRenderCharacterTips && mSelectedCharacter != -1)
+			{
+				SelectAvatar* avatar = &mAvatars[mSelectedCharacter];
+				Vector3 wpos = avatar->mEntity->GetPosition();
+				wpos.z += avatar->mEntity->GetEntityHeight();
+				Vector3 vpos = gScene->GetScreenPosition(wpos);
+				Point pos(int(vpos.x), int(vpos.y));
+				pos.x -= avatar->mToolTip->SizeX() / 2;
+				pos.y -= avatar->mToolTip->SizeY();
+				avatar->mToolTip->SetPosition(pos);
+				avatar->mToolTip->Render();
+			}
+		}
+		catch(...)
+		{
+			LOG("Error: 0x%x", GetLastError());
 		}
 
 		gScene->End2D();

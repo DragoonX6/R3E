@@ -24,6 +24,7 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
+BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){
 	gWindow->SetOpenGLThread();
@@ -53,7 +54,6 @@ int __cdecl main(int, char**){
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
 
-	BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 	BufferedFileSystem::SetFileSystem(fs);
 
 	gWindow->SetSize(1024, 768);

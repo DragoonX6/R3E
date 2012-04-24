@@ -111,6 +111,8 @@ void MsgBox::SetButtons(int buttons){
 
 void MsgBox::SetMessage(const char* message){
 	try{
+		if(mListBox->GetItem(1))
+			mListBox->DeleteItem(1);
 		int messageSize = strlen(message);
 		if(messageSize >= 21)
 		{
@@ -143,13 +145,22 @@ void MsgBox::SetMessage(const char* message){
 			messageSize -= i; // make it the size of the last x chars
 			newstr = new char[messageSize];
 			memset(newstr, 0, messageSize);
+
 			char *tempstr = new char[messageSize];
 			memset(tempstr, 0, messageSize); // clear the string
+
 			memmove(tempstr+0, message+i, messageSize); // move the end of the string in a new string
 			tempstr[messageSize] = 0; // make our string zero terminated
+
+			// strcpy_s doesn't work in this case, so disable the warnings, that's less work then manualy copying the string
+			#pragma warning(push)
+			#pragma warning(disable:4996)
+			#pragma warning(disable:4995)
 			strcpy(newstr, tempstr);
+			#pragma warning(pop)
 			memmove(tempstr+0, message+0, i);
 			tempstr[i] = 0;
+
 			message = tempstr;
 			mListBox->SetItem(0, message);
 			mListBox->AddItem(newstr);
@@ -162,6 +173,12 @@ void MsgBox::SetMessage(const char* message){
 	catch(std::exception& e)
 	{
 		OutputDebugString(e.what());
+		LOG("Exception occured: %s", e.what());
+	}
+	catch(...)
+	{
+		OutputDebugString("Error!");
+		LOG("Error! 0X%x", GetLastError());
 	}
 	mListBox->SetItem(0, message);
 

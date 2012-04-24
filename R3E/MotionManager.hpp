@@ -21,6 +21,7 @@ public:
 
 	void SetWeaponSTB(ROSE::STB* stb);
 	SmartPointer<ROSE::ZMO> LoadMotion(int weapon, int action, int gender) const;
+	SmartPointer<ROSE::ZMO> LoadMotionSelect() const;
 
 private:
 	ROSE::STB mTypeMotion;

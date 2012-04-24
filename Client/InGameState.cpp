@@ -78,7 +78,7 @@ int InGameState::HandleEvent(GuiEvent* gevt){
 	if(gevt->_evt_type == EVT_MOUSE){
 		MouseEvent* evt = (MouseEvent*)gevt;
 		if(evt->type == WHEEL)
-			mCamera->AddDistance(float(evt->button) / 40.0f);
+			mCamera->AddDistance((float(evt->button) / 40.0f) * -1.0f);
 		else if(evt->type == BUTTON_UP && evt->button == LBUTTON){
 			Vector2 wnd = Vector2(float(gWindow->Width()), float(gWindow->Height()));
 			Vector3 mouse = Vector3(float(evt->pos.x), float(gWindow->Height() - evt->pos.y), 0.0f);
@@ -93,6 +93,20 @@ int InGameState::HandleEvent(GuiEvent* gevt){
 				pakout.AddVal<short>(short(pos.z * 100.0f));
 				gNetwork->SendPacket(GS, &pakout);
 				mMousePos = pos;
+			}
+		}
+	}
+	// Untested
+	if(gevt->_evt_type == EVT_KEYBOARD)
+	{
+		KeyboardEvent *kevt = (KeyboardEvent*)gevt;
+		if(kevt->type == KEY_UP)
+		{
+			if(kevt->key == VK_RETURN)
+			{
+				ChatDialog *dlg = (ChatDialog*)gInterface->FindDialog(DLG_CHAT_BOX);
+				if(dlg)
+					dlg->HandleEvent(kevt);
 			}
 		}
 	}

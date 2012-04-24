@@ -84,7 +84,8 @@ enum AvtMotionType {
 	AVT_ANI_JUMP2	= 16,
 
 	AVT_ANI_PICKITEM = 17,
-	MAX_AVT_ANI
+	AVT_ANI_FIGHTING = 307,
+	MAX_AVT_ANI = 1091
 };
 
 static const char* AvatarAnimName[] = {

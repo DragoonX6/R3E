@@ -84,7 +84,7 @@
       <AdditionalIncludeDirectories>..\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/IGNORE:4204 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/ignore:4204 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>ws2_32.lib;..\Debug\RNEd.lib;..\Debug\R3Ed.lib;..\Debug\RGEd.lib;..\Debug\RECommond.lib;..\Libraries\lib\ticppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>

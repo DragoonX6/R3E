@@ -7,6 +7,8 @@
 #include "BufferedFile.hpp"
 #include "Log.hpp"
 
+extern class BufferedFileSystem *fs;
+
 class BufferedFileSystem : public FileSystem {
 public:
 	BufferedFileSystem(){}

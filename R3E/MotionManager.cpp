@@ -27,3 +27,10 @@ SmartPointer<ROSE::ZMO> MotionManager::LoadMotion(int weapon, int action, int ge
 
 	return ANIM_MGR().Load(file);
 }
+
+SmartPointer<ROSE::ZMO> MotionManager::LoadMotionSelect() const {
+	const char* file = mFileMotion.GetString(307, 0);
+	if(strlen(file) < 3) return SmartPointer<ROSE::ZMO>();
+
+	return ANIM_MGR().Load(file);
+}

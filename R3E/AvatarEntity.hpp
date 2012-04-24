@@ -12,6 +12,7 @@ public:
 	bool SetItem(int type, int id);
 
 	void SetAvatarState(int state);
+	void SetAvatarSelect();
 	void SetHairStyle(int style);
 	void SetFaceStyle(int style);
 

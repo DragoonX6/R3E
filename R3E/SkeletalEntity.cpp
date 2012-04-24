@@ -7,6 +7,9 @@ SkeletalEntity::SkeletalEntity()
 {
 	mLastUpdate = clock();
 	mType = ENTITY_1TEX_MESH;
+
+	nb_loops = 0;
+	max_loops = 0;
 }
 
 SkeletalEntity::~SkeletalEntity(){
@@ -44,6 +47,10 @@ void SkeletalEntity::Update(){
 		if(!mPaused)
 			SetFrame(mCurFrame + 1);
 
+		if(max_loops != 0 && nb_loops >= max_loops){
+				PauseAnimation();
+			}
+
 		mLastUpdate = clock();
 	}
 
@@ -67,6 +74,8 @@ void SkeletalEntity::SetAnimation(SmartPointer<ROSE::ZMO>& anim){
 	if(mAnimation == anim) return;
 	mAnimation = anim;
 	PreloadFrames();
+	nb_loops=0;
+	max_loops=0;
 }
 
 void SkeletalEntity::PauseAnimation(){
@@ -77,10 +86,31 @@ void SkeletalEntity::ResumeAnimation(){
 	mPaused = false;
 }
 
+void SkeletalEntity::PauseAnimationAtLoop(int x){
+	max_loops=x;
+	if(max_loops==0){
+		nb_loops=0;
+	}
+
+}
+
+//LMA: Nb Loops already done (only interesting if max_loops!=0).
+int SkeletalEntity::GetNbLoopDone()
+{
+	return nb_loops;
+}
+
 void SkeletalEntity::SetFrame(int frame){
 	if(frame < 0) frame = 0;
 	mCurFrame = frame;
-	if(mCurFrame >= mAnimation->GetFrameCount()) mCurFrame = 0;
+	if(mCurFrame >= mAnimation->GetFrameCount())
+		mCurFrame = 0;
+
+	if (max_loops > 0)
+	{
+		nb_loops++;
+	}
+
 	Matrix4* mat = mBoneMatrices[mCurFrame].Data();
 	for(unsigned int i = 0; i < mChildren.Size(); ++i)
 		mChildren[i]->UpdateAnimation(mat);
