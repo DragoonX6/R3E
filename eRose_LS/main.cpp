@@ -19,21 +19,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	wnd = new Window(); // init our window object
 	wnd2 = new Window(); // idem
-	cfgwnd = new Window();
-	cfg = new CConfig();
+	cfgwnd = new Window(); // idem
+	cfg = new CConfig(); // init our config object
 	InitCommonControls();
 	MSG msg;
-	wnd->ghInstance = hInstance;
-	wnd2->ghInstance = hInstance;
-	cfgwnd->ghInstance = hInstance;
+	wnd->ghInstance = hInstance; // init the window instance
+	wnd2->ghInstance = hInstance; // idem
+	cfgwnd->ghInstance = hInstance; // idem
 	wnd->CmdShow = nCmdShow;
 	wnd2->CmdShow = nCmdShow;
 	cfgwnd->CmdShow = nCmdShow;
-	wnd->hWindow = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, MainDlg);
+	wnd->hWindow = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, MainDlg); // create our main dialog
 	if(!wnd->hWindow) // if hwindow == NULL
 	{
 		char buf[100];
-		sprintf(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
+		sprintf_s(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
 		MessageBox (0, buf, "CreateDialog", MB_ICONEXCLAMATION | MB_OK); // display it in a message box
 		//LOG(buf);
         return -1; // stop the application
@@ -78,21 +78,17 @@ BOOL CALLBACK MainDlg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}break;
 			case ID_HELP_ABOUT:
 				{
-					try
-					{
 						wnd2->hWindow = CreateDialog(wnd2->ghInstance, MAKEINTRESOURCE(IDD_DIALOG2), wnd->hWindow, dlg2proc); //create our about window
 						if(!wnd2->hWindow)
-							throw wnd2->hWindow;
+						{
+							char buf[100];
+							sprintf_s(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
+							MessageBox (0, buf, "Error creating about window", MB_ICONEXCLAMATION | MB_OK); // display it in a message box
+						}
 						SetDlgItemText(wnd2->hWindow, IDC_EDIT1, "\t\t\teRose Login Server\r\n\t\t\tWritten by Dragoon\r\n\t\t         rafael_andreas@hotmail.com\r\n"); // lazy way of centering the text
 						ShowWindow(wnd2->hWindow, wnd2->CmdShow); //show it
 						UpdateWindow(wnd2->hWindow); // update it
-					}
-					catch(...)
-					{
-						char buf[100];
-						sprintf(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
-						MessageBox (0, buf, "Error creating about window", MB_ICONEXCLAMATION | MB_OK); // display it in a message box
-					}
+						
 				}break;
 			}
 		}break;
@@ -172,13 +168,10 @@ BOOL CALLBACK MainDlg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				lvc3.cx			= 100;
 				lvc3.fmt		= LVCFMT_LEFT;
 				ListView_InsertColumn(GetDlgItem(wnd->hWindow, IDC_LIST3), 2, &lvc3);
-				wnd->listset = true;
+				wnd->listset = true; // this is to stop recreating the stuff every time it calls WM_NOTIFY
 			}
 			if(!wnd->tabctr) // init the tabs
 			{ 
-				// Load the day string from the string resources. Note that
-				// g_hInst is the global instance handle.
-				//LoadString(g_hInst, IDS_SUNDAY + i, achTemp, sizeof(achTemp) / sizeof(achTemp[0]));
 				if (TabCtrl_InsertItem(GetDlgItem(wnd->hWindow, IDC_TAB1), 0, &wnd->tie) == -1)
 				{
 					return NULL;
@@ -195,34 +188,18 @@ BOOL CALLBACK MainDlg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			if(!wnd->configset)
 			{
-				try
-				{
-					cfgwnd->hWindow = CreateDialog(cfgwnd->ghInstance, MAKEINTRESOURCE(IDD_DIALOG3), wnd->hWindow, cfgproc);
-					if(!cfgwnd->hWindow)
-						throw cfgwnd->hWindow;
-					if(!cfg->ReadIni())
-						throw 1;
-					ShowWindow(cfgwnd->hWindow, cfgwnd->CmdShow); //show it
-					UpdateWindow(cfgwnd->hWindow); // update it
-				}
-				catch(HWND h)
+				cfgwnd->hWindow = CreateDialog(cfgwnd->ghInstance, MAKEINTRESOURCE(IDD_DIALOG3), wnd->hWindow, cfgproc);
+				if(!cfgwnd->hWindow)
 				{
 					char buf[100];
-					sprintf(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
+					sprintf_s(buf, "Error 0x%x", GetLastError()); // copy the last error into the buffer
 					MessageBox (0, buf, "Error creating config window", MB_ICONEXCLAMATION | MB_OK); // display it in a message box
-					closedialog(h);
+					closedialog(cfgwnd->hWindow);
 					closedialog(wnd->hWindow);
 					PostQuitMessage(0);
 				}
-				catch(int i)
-				{
-					if(i == 1)
-					{
-						closedialog(cfgwnd->hWindow);
-						closedialog(wnd->hWindow);
-						PostQuitMessage(0);
-					}
-				}
+				ShowWindow(cfgwnd->hWindow, cfgwnd->CmdShow); //show it
+				UpdateWindow(cfgwnd->hWindow); // update it
 				wnd->configset = true;
 			}
 			switch(((LPNMHDR)lParam)->code)
@@ -293,6 +270,13 @@ BOOL CALLBACK cfgproc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_INITDIALOG:
 		{
+			bool ret = cfg->ReadIni();
+			if(!ret)
+			{
+				closedialog(cfgwnd->hWindow);
+				closedialog(wnd->hWindow);
+				PostQuitMessage(0);
+			}
 			return TRUE;
 		}break;
 	case WM_COMMAND:
