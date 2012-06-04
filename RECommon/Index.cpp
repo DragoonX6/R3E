@@ -1,7 +1,6 @@
 #include "Index.hpp"
 
 Index::Index() :curversion(0), basever(0), vfscount(0), vinfo(0), vfsfile(0)
-	curversion(0), basever(0), vfscount(0), vinfo(0)
 {
 }
 
@@ -54,6 +53,7 @@ bool Index::Load(const char *path)
 	return true;
 }
 
+/*
 bool Index::New(const char* path)
 {
 	if(!fIndex->Open(path, "wb"))
@@ -98,17 +98,17 @@ void Index::WriteVFSCount(unsigned long cnt)
 
 void Index::WriteVFSName(String name, unsigned long num) // not sure if works
 {
-	/* <xor_mind-> I explain it in the following line, shift all data after the block you want to delete, by the size of the block you want to delete, then resize the file
+	/ * <xor_mind-> I explain it in the following line, shift all data after the block you want to delete, by the size of the block you want to delete, then resize the file
 	<xor_mind-> you can do that easily with file pointers
 	<xor_mind-> or a memory map
-	<xor_mind-> in winderz */
+	<xor_mind-> in winderz * /
 	bool VfsExists = false;
 	unsigned char* Buffer;
 	unsigned char* Buffer2;
 	unsigned long thisoffset = 0;
 	unsigned long ToRead = 0;
 	unsigned long vfsoffset = 0;
-	unsigned long toadd;
+	unsigned long toadd = 0;
 	if(num > vfscount)
 		return;
 	fIndex->Seek(12);
@@ -168,7 +168,7 @@ void Index::WriteVFSInfo(VFSINFO* info) // not used yet
 void Index::WriteVFSFile(VFSFILE* file)
 {
 
-}
+}*/
 
 unsigned long Index::GetBaseVersion() const
 {
@@ -217,7 +217,7 @@ VFSINFO *Index::GetVfsInfo(const char *filename) const
 
 VFSFILE *Index::GetVfsFile(const char* filename)
 {
-	for(unsigned long i = 0; i < (vfscount - 1); i++)
+	for(unsigned long i = 0; i < (vfscount); i++)
 	{
 		fIndex->Seek(offset[i]);
 		fIndex->Skip((sizeof(unsigned long) * 3)); // skip vfsinfo to read fileinfo

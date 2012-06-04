@@ -51,7 +51,7 @@ File* VFSFileSystem::OpenFile(const char* path, const char* /*mode*/, bool /*dat
 	if(!file->Open(vfspath, "rb"))
 		return 0;
 	file->SeekVFS(entry->offset);
-	file->ReadVFSData(buffer, entry->size);
+	file->ReadVFSData((void*)buffer, entry->size);
 	file->SetData(buffer, entry->size);
 	file->CloseVFS();
 	return file;

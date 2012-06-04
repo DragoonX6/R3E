@@ -32,13 +32,13 @@ public:
 	Index(const char* path);
 	~Index();
 	bool Load(const char* path);
-	bool New(const char* path);
-	void WriteBaseVersion(unsigned long ver);
+	//bool New(const char* path);
+	/*void WriteBaseVersion(unsigned long ver);
 	void WriteCurrentVersion(unsigned long ver);
 	void WriteVFSCount(unsigned long cnt);
 	void WriteVFSName(String name, unsigned long num);
 	void WriteVFSInfo(VFSINFO* Info);
-	void WriteVFSFile(VFSFILE* file);
+	void WriteVFSFile(VFSFILE* file);*/
 	unsigned long GetBaseVersion() const;
 	unsigned long GetCurrentVersion() const;
 	unsigned long VfsCount() const;

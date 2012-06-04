@@ -10,7 +10,7 @@ public:
 
 	virtual bool Open(const char* path, const char* method) = 0;
 	virtual void Close() = 0;
-	virtual void Delete() = 0;
+	//virtual void Delete() = 0;
 
 	virtual int ReadData(void* data, int size) = 0;
 	virtual int WriteData(void* data, int size) = 0;
