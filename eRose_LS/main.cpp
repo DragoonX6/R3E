@@ -275,6 +275,7 @@ BOOL CALLBACK cfgproc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				closedialog(cfgwnd->hWindow);
 				closedialog(wnd->hWindow);
+				MessageBox(wnd2->hWindow, "Erose_LS.ini not found!", "Error", MB_ICONERROR | MB_OK);
 				PostQuitMessage(0);
 			}
 			return TRUE;

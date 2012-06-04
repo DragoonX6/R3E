@@ -25,7 +25,6 @@ bool CConfig::ReadIni()
 	FindFirstFile("./eRose_LS.ini", &find);
 	if(GetLastError() == ERROR_FILE_NOT_FOUND)
 	{
-		MessageBox(cfgwnd->hWindow, "Erose_LS.ini not found!", "Error", MB_ICONERROR | MB_OK);
 		return false;
 	}
 	GetPrivateProfileString("Config", "DBIP", NULL, ip, 16, "./eRose_LS.ini");
