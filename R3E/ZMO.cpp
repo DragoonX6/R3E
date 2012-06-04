@@ -87,6 +87,11 @@ namespace ROSE {
 		return mFPS;
 	}
 
+	void ZMO::SetFPS(unsigned int val)
+	{
+		mFPS = val;
+	}
+
 	void ZMO::CreateBoneMatrices(int frame, const Array<ZMD::Bone>& bindBoneList, Array<Matrix4>& matrices) const {
 		matrices.SetSize(bindBoneList.Size());
 		for(unsigned int i = 0; i < bindBoneList.Size(); ++i){

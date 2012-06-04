@@ -67,6 +67,13 @@ int ChatDialog::HandleEvent(KeyboardEvent* evt){
 			SendChatMessage();
 		}
 	}
+	else if(evt->type == KEY_CHAR && evt->key == VK_RETURN)
+	{
+		if(UiState::mFocus != mEditBox)
+		{
+			mEditBox->SetFocus(true);
+		}
+	}
 
 	return ret;
 }
@@ -133,9 +140,12 @@ void ChatDialog::AddChatMessage(const char* message, ChatType type, Colour force
 	}
 }
 
-void ChatDialog::SendChatMessage(){
+void ChatDialog::SendChatMessage()
+{
 	const char* text = mEditBox->GetText();
-	switch(text[0]){
+	if(strcmp(text, ""))
+	{
+		switch(text[0]){
 		case '!':
 			break;
 		case '$':
@@ -153,7 +163,8 @@ void ChatDialog::SendChatMessage(){
 			pakout.Add(text);
 			gNetwork->SendPacket(GS, &pakout);
 			break;
-	};
+		};
+	}
 
-	mEditBox->ClearText();
+		mEditBox->ClearText();
 }

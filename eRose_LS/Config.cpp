@@ -61,16 +61,16 @@ bool CConfig::WriteIni()
 			throw "Error writing to eRose_LS.ini";
 		char tempstr[1024];
 		memset(tempstr, 0, 1024);
-		itoa(serverport, tempstr, 10);
+		_itoa(serverport, tempstr, 10);
 		WritePrivateProfileString("Config", "ServerListenPort", tempstr, "./eRose_LS.ini");
 		memset(tempstr, 0, 1024);
-		itoa(minright, tempstr, 10);
+		_itoa(minright, tempstr, 10);
 		WritePrivateProfileString("Config", "LoginRight", tempstr, "./eRose_LS.ini");
 		memset(tempstr, 0, 1024);
-		itoa(clientport, tempstr, 10);
+		_itoa(clientport, tempstr, 10);
 		WritePrivateProfileString("Config", "ClientListenPort", tempstr, "./eRose_LS.ini");
 		memset(tempstr, 0, 1024);
-		itoa(limituser, tempstr, 10);
+		_itoa(limituser, tempstr, 10);
 		WritePrivateProfileString("Config", "LimitUserCNT", tempstr, "./eRose_LS.ini");
 		WritePrivateProfileString("Config", "DBPassword", password, "./eRose_LS.ini");
 	}

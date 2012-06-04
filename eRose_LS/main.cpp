@@ -10,6 +10,11 @@ Window *cfgwnd;
 CLoginServer *LS;
 CConfig *cfg;
 
+DWORD WINAPI Run()
+{
+	return LS->Run();
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	wnd = new Window(); // init our window object

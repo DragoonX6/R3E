@@ -27,7 +27,7 @@ bool InGameState::CanEnterState(){
 }
 
 void InGameState::EnterState(){
-	ChatDialog* dlg = (ChatDialog*)gInterface->FindDialog(DLG_CHAT_BOX);
+	dlg = (ChatDialog*)gInterface->FindDialog(DLG_CHAT_BOX);
 	if(dlg) dlg->SetVisible(true);
 
 	gPlayer->SetPosition(gPlayer->GetPosition());//fix z pos
@@ -96,20 +96,6 @@ int InGameState::HandleEvent(GuiEvent* gevt){
 			}
 		}
 	}
-	// Untested
-	if(gevt->_evt_type == EVT_KEYBOARD)
-	{
-		KeyboardEvent *kevt = (KeyboardEvent*)gevt;
-		if(kevt->type == KEY_UP)
-		{
-			if(kevt->key == VK_RETURN)
-			{
-				ChatDialog *dlg = (ChatDialog*)gInterface->FindDialog(DLG_CHAT_BOX);
-				if(dlg)
-					dlg->HandleEvent(kevt);
-			}
-		}
-	}
 
 	return 0;
 }
@@ -156,6 +142,20 @@ void InGameState::DeleteObject(unsigned int cid){
 
 int InGameState::HandleEvent(NetworkEvent* nevt){
 	switch(nevt->_evt_type){
+		case NET_PAK_PING:
+		{
+			pakPingEvent* evt = (pakPingEvent*)nevt;
+			if(evt->srvID == GS)
+			{
+				Packet pakout(0x700);
+				gNetwork->SendPacket(GS, &pakout);
+				LOG("Ping sent back to %i",evt->srvID);
+			}
+			else
+			{
+				LOG("Not replying to ping packet from %i",evt->srvID);
+			}
+		}break;
 		case NET_PAK_MOVE_PLAYER:
 		case NET_PAK_MOVE_NPC:
 		{

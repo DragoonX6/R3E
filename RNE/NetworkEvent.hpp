@@ -24,6 +24,7 @@ enum NetworkEventType {
 	NET_PAK_TELEPORT,
 	NET_PAK_LOCAL_CHAT,
 	NET_PAK_DAMAGE,
+	NET_PAK_PING,
 };
 
 struct NetworkEvent {

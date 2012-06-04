@@ -10,6 +10,7 @@ public:
 
 	virtual bool Open(const char* path, const char* method) = 0;
 	virtual void Close() = 0;
+	virtual void Delete() = 0;
 
 	virtual int ReadData(void* data, int size) = 0;
 	virtual int WriteData(void* data, int size) = 0;
@@ -54,7 +55,8 @@ public:
 
 	unsigned char* ReadBytes(int length){
 		unsigned char* buffer = new unsigned char[length];
-		if(ReadData(buffer, length))
+		int size = length;
+		if(ReadData(buffer, size))
 			return buffer;
 
 		delete [] buffer;

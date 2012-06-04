@@ -10,7 +10,7 @@ class CLoginServer: MSSQL
 public:
 	CLoginServer(void);
 	~CLoginServer(void);
-	DWORD WINAPI Run();
+	int Run();
 	bool isRunning;
 	MSSQL *sql;
 };

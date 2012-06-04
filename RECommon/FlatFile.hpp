@@ -18,6 +18,7 @@ public:
 
 	bool Open(const char* path, const char* method){
 		fopen_s(&fh, path, method);
+		file = path;
 		return IsOpen();
 	}
 
@@ -28,6 +29,11 @@ public:
 	void Close(){
 		if(!fh) return;
 		fclose(fh);
+	}
+
+	void Delete()
+	{
+		remove(file);
 	}
 
 	int ReadData(void* data, int size){
@@ -64,6 +70,7 @@ public:
 
 private:
 	FILE* fh;
+	const char* file;
 };
 
 #endif

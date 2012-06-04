@@ -23,6 +23,15 @@ void NetworkManager::RegisterPacketHandlers(){
 	REGISTER_PACKET_HANDLER(0x79A, pakMovePlayer);
 	REGISTER_PACKET_HANDLER(0x7A8, pakTeleport);
 	REGISTER_PACKET_HANDLER(0x7FF, pakNetworkStatus);
+	REGISTER_PACKET_HANDLER(0x700, pakPing);
+}
+
+DEFINE_PACKET_HANDLER(pakPing)
+{
+	pakPingEvent* evt = CreateEvent<pakPingEvent>(srv);
+	printf("Ping received from %i \n",evt->srvID);
+	Emit(evt);
+	return true;
 }
 
 DEFINE_PACKET_HANDLER(pakNetworkStatus){

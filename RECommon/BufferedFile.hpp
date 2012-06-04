@@ -4,6 +4,7 @@
 #include "File.hpp"
 #include "SafeDelete.hpp"
 #include <stdio.h>
+#include "Windows.hpp"
 
 class BufferedFile : public File {
 public:
@@ -16,6 +17,12 @@ public:
 
 	~BufferedFile(){
 		Close();
+	}
+
+	void SetData(unsigned char* buffer, long size){
+		mPosition = 0;
+		mSize = size;
+		mBuffer = buffer;
 	}
 
 	bool Open(const char* path, const char* method){

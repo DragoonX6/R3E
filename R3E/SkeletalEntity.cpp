@@ -1,6 +1,7 @@
 #include "Global.h"
 
 #include "SkeletalEntity.hpp"
+#include "..\Client\Player.hpp"
 
 SkeletalEntity::SkeletalEntity()
 	: mBoneMatrices(0), mBoneMatricesAbs(0), mCurFrame(0), mUpdateInterval(0), mPaused(false)
@@ -176,6 +177,8 @@ void SkeletalEntity::PreloadFrames(){
 
 	Array<Matrix4> frameMatrices;
 	mCurFrame = 0;
+	if(gPlayer->GetAvatarState() == STATE_RUN)
+		motion->SetFPS(gPlayer->GetMoveSpeed());
 	mUpdateInterval = 1000 / motion->GetFPS();
 
 	mBoneMatrices = new Array<Matrix4>[motion->GetFrameCount()];

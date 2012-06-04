@@ -172,6 +172,11 @@ unsigned short Character::GetCharacterType() const {
 	return mCharacterType;
 }
 
+float Character::GetMoveSpeed() const
+{
+	return mMoveSpeed;
+}
+
 void Character::UpdateTransform(){
 	mEntity->SetTransform(Matrix4::CreateRotationZ(mDirection) * Matrix4::CreateScaling(Vector3(mScale)) * Matrix4::CreateTranslation(mPosition));
 }

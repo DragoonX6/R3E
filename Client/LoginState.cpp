@@ -1,5 +1,6 @@
 #include "Global.h"
 
+#include "Array.hpp"
 #include "MD5.hpp"
 #include "Fonts.hpp"
 #include "Player.hpp"

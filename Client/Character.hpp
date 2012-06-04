@@ -42,6 +42,8 @@ public:
 	const Vector3& GetPosition() const;
 	unsigned short GetCharacterType() const;
 
+	float GetMoveSpeed() const;
+
 	virtual void Draw2D() = 0;
 	virtual void OnStateChange() = 0;
 	virtual const char* GetName() = 0;

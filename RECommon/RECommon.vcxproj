@@ -132,12 +132,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Index.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MD5.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Colour.cpp" />
+    <ClCompile Include="TitanFileSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Index.hpp" />
     <ClInclude Include="Log.hpp" />
     <ClInclude Include="CriticalSection.hpp" />
     <ClInclude Include="Global.h" />

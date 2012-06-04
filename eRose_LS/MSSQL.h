@@ -10,5 +10,7 @@ class MSSQL
 public:
 	MSSQL(void);
 	~MSSQL(void);
-	HANDLE sqlhdl;
+	bool Connect(SQLCHAR* dsn, SQLCHAR *user, SQLCHAR* password);
+	HANDLE sqlenv;
+	HANDLE sqlconn;
 };

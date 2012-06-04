@@ -27,6 +27,11 @@ struct GameChannel {
 	String mName;
 };
 
+struct pakPingEvent: public NetworkEvent
+{
+	static const unsigned int EventType = NET_PAK_PING;
+};
+
 struct PakChannelListEvent : public NetworkEvent {
 	static const unsigned int EventType = NET_PAK_CHANNEL_LIST;
 

@@ -33,6 +33,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConEditor", "ConEditor\ConE
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Launcher", "Launcher\Launcher.vcxproj", "{155B47F6-1A31-48D5-9819-2A8ED303FD02}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VFSRebuilder", "VFSRebuilder\VFSRebuilder.vcxproj", "{CC2395EC-47F7-4383-A569-695132425862}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -94,6 +96,12 @@ Global
 		{155B47F6-1A31-48D5-9819-2A8ED303FD02}.Release + Debug Info|Win32.Build.0 = Release|Win32
 		{155B47F6-1A31-48D5-9819-2A8ED303FD02}.Release|Win32.ActiveCfg = Release|Win32
 		{155B47F6-1A31-48D5-9819-2A8ED303FD02}.Release|Win32.Build.0 = Release|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Debug|Win32.Build.0 = Debug|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Release + Debug Info|Win32.ActiveCfg = Release|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Release + Debug Info|Win32.Build.0 = Release|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Release|Win32.ActiveCfg = Release|Win32
+		{CC2395EC-47F7-4383-A569-695132425862}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,5 +116,6 @@ Global
 		{13BEE71A-2FF5-43E0-B691-DDFD5E9BC773} = {751746BA-35C6-42E5-B015-70626B3F14B2}
 		{3832C3F0-FDF9-4D06-BC2B-93A879356AEC} = {9B7672E5-A472-48DA-976A-2918BC4F86E4}
 		{CC2D6798-EB6A-4129-89EC-A66FE36F6EA9} = {9B7672E5-A472-48DA-976A-2918BC4F86E4}
+		{CC2395EC-47F7-4383-A569-695132425862} = {9B7672E5-A472-48DA-976A-2918BC4F86E4}
 	EndGlobalSection
 EndGlobal

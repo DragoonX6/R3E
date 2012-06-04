@@ -34,6 +34,12 @@
     <ClCompile Include="Colour.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
+    <ClCompile Include="Index.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="TitanFileSystem.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Log.hpp">
@@ -137,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="RoseStructs.hpp">
       <Filter>ROSE</Filter>
+    </ClInclude>
+    <ClInclude Include="Index.hpp">
+      <Filter>File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

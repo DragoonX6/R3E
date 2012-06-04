@@ -62,6 +62,7 @@ private:
 	}
 
 private:
+	DEFINE_PACKET_HANDLER(pakPing);
 	DEFINE_PACKET_HANDLER(pakNetworkStatus);
 	DEFINE_PACKET_HANDLER(pakChannelList);
 	DEFINE_PACKET_HANDLER(pakLoginResult);

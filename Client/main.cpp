@@ -2,8 +2,8 @@
 
 #include "..\R3E\SceneManager.hpp"
 #include "..\RNE\NetworkManager.hpp"
-//#include "...\RECommon\BufferedFileSystem.hpp"
-#include "..\RECommon\BufferedFileSystem.hpp"
+//#include "..\RECommon\BufferedFileSystem.hpp"
+#include "..\RECommon\TitanFileSystem.hpp"
 
 #include "Player.hpp"
 #include "Window.hpp"
@@ -24,7 +24,7 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
-BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
+//BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){
 	gWindow->SetOpenGLThread();
@@ -54,7 +54,10 @@ int __cdecl main(int, char**){
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
 
-	BufferedFileSystem::SetFileSystem(fs);
+	//BufferedFileSystem::SetFileSystem(fs);
+	VFSFileSystem *fs = new VFSFileSystem("C:\\Program Files\\eRose\\");
+	fs->LoadIndex("data.idx");
+	VFSFileSystem::SetFileSystem(fs);
 
 	gWindow->SetSize(1024, 768);
 	gWindow->SetTitle("ROSE++ by ExJam");

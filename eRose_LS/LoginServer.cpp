@@ -11,7 +11,7 @@ CLoginServer::~CLoginServer(void)
 {
 }
 
-DWORD WINAPI CLoginServer::Run()
+int CLoginServer::Run()
 {
 	return NULL;
 }

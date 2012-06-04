@@ -48,6 +48,7 @@ namespace ROSE {
 		void Unload();
 
 		unsigned int GetFPS() const;
+		void SetFPS(unsigned int val);
 		unsigned int GetFrameCount() const;
 
 		Channel* GetChannel(int idx) const;

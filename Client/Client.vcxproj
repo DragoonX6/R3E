@@ -159,7 +159,6 @@
     <ClInclude Include="RoseStructs.hpp" />
     <ClInclude Include="String.hpp" />
     <ClInclude Include="TitanFileSystem.hpp" />
-    <ClInclude Include="TriggerVfs.h" />
     <ClInclude Include="Windows.hpp" />
     <ClInclude Include="Avatar.hpp" />
     <ClInclude Include="Character.hpp" />

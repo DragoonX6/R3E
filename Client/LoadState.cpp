@@ -10,7 +10,6 @@
 #include "..\R3E\RoseData.hpp"
 #include "..\R3E\MapManager.hpp"
 #include "..\R3E\SceneManager.hpp"
-#include "..\RECommon\BufferedFileSystem.hpp"
 #include "..\R3E\STB.hpp"
 
 LoadState::LoadState(int map){

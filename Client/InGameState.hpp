@@ -22,6 +22,7 @@ public:
 
 private:
 	class TargetCamera* mCamera;
+	class ChatDialog *dlg;
 };
 
 #endif
