@@ -13,5 +13,17 @@ CLoginServer::~CLoginServer(void)
 
 int CLoginServer::Run()
 {
-	return NULL;
+	isRunning = true;
+	sql->Connect((SQLCHAR*)"seven_ORA", (SQLCHAR*)cfg->user, (SQLCHAR*)cfg->password);
+	while(isRunning)
+	{
+		// Receive packet function
+		// dispatch packet function
+	}
+	return 0;
+}
+
+void CLoginServer::Stop()
+{
+	isRunning = false;
 }

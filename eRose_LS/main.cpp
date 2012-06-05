@@ -1,8 +1,4 @@
 #include "stdafx.h"
-#include "Thread.h"
-#include "Window.h"
-#include "LoginServer.h"
-#include "Config.h"
 
 Window *wnd;
 Window *wnd2;

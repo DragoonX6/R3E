@@ -9,6 +9,10 @@
 #include <string.h>
 #include "resource.h"
 #include "..\RECommon\SafeDelete.hpp"
+#include "Thread.h"
+#include "Window.h"
+#include "LoginServer.h"
+#include "Config.h"
 
 BOOL CALLBACK MainDlg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK dlg2proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

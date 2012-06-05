@@ -12,7 +12,7 @@ public:
 	~CConfig(void);
 	bool ReadIni();
 	bool WriteIni();
-	char *ip;
+	char *user;
 	char *password;
 	int serverport;
 	int clientport;

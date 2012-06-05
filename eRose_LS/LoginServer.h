@@ -11,6 +11,8 @@ public:
 	CLoginServer(void);
 	~CLoginServer(void);
 	int Run();
+	void Stop();
+private:
 	bool isRunning;
 	MSSQL *sql;
 };

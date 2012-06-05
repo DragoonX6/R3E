@@ -11,6 +11,9 @@ public:
 	MSSQL(void);
 	~MSSQL(void);
 	bool Connect(SQLCHAR* dsn, SQLCHAR *user, SQLCHAR* password);
-	HANDLE sqlenv;
-	HANDLE sqlconn;
+	void Disconnect();
+	SQLRETURN ExecuteQuery(SQLCHAR* Query);
+	void ReadData(SQLCHAR* Buffer, int size, SQLCHAR* Query);
+private:
+	HANDLE sqlenv, sqlconn, sqlstatement;
 };
