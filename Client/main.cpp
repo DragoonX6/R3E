@@ -24,7 +24,7 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
-VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose\\");
+VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose");
 //BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){

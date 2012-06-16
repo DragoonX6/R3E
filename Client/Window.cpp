@@ -4,6 +4,7 @@
 #include "StateManager.hpp"
 #include "..\RGE\TranslateWin32Event.hpp"
 #include "..\R3E\SceneManager.hpp"
+#include "..\Client\resource.h"
 
 Window::Window()
 	: mFrameTime(1000 / 60)
@@ -104,7 +105,7 @@ int Window::Create(){
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = mInstance;
-	wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);
+	wc.hIcon = (HICON)LoadImage(GetModuleHandle(0), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 16, 16, 0); //LoadIcon(NULL, IDI_WINLOGO);
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = NULL;
 	wc.lpszMenuName = NULL;
