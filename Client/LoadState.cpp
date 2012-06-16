@@ -58,7 +58,8 @@ int LoadState::Run(){
 	{
 		if(sFirstLoad)
 		{
-			ldscreen.Load("3DDATA\\CONTROL\\RES\\EXUI1.DDS");
+			if(!ldscreen.Load("3DDATA\\CONTROL\\RES\\r3elogo.png"))
+				ldscreen.Load("3DDATA\\CONTROL\\RES\\EXUI1.DDS");
 			break;
 		}
 		else

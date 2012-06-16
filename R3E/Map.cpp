@@ -43,14 +43,48 @@ void Map::Load(const char* zon){
 	mIndexBuffer->SetType(GL_TRIANGLE_STRIP);
 
 	mZoneData = new ROSE::ZON();
-	mZoneData->Load(zon);
+	String tmp = zon;
+	tmp.ToUpper();
+	bool ret = mZoneData->Load(tmp.Str());
+	assert(ret != false);
 
 	BoundingBox bbox;
 	String path;
-	for(int x = 0; x < 64; ++x){
-		for(int y = 0; y < 64; ++y){
-			path = String("%1\\%2_%3.HIM").arg(directory.Str()).arg(x).arg(y);
-			if(!FILE_SYS()->FileExists(path)) continue;
+	// List all the HIM Files and load one by one. This is faster then looking for them in a loop.
+	if(VFSFileSystem::IsCurrentSys)
+	{
+		List<String> HIM;
+		directory.ToUpper();
+		VfsSys->IndexGetHIM(directory, &HIM);
+		for(unsigned int i = 0; i < HIM.size(); ++i)
+		{
+			char str[128];
+			memset(str, 0, 128);
+			strcpy_s(str, HIM.at(i).Str());
+			int x = 0;
+			int y = 0;
+			bool fhit = false;
+			for(char *p = str; *p; p++) // get the array numbers out of the him string
+			{
+				int num = 0;
+				if(isdigit(*p))
+				{
+					num = atoi(p);
+					if(num >= 31 && num <= 64)
+					{
+						if(!fhit)
+						{
+							fhit = true;
+							x = num;
+						}
+						else
+						{
+							y = num;
+						}
+					}
+				}
+			}
+			path = HIM.at(i); // We don't need to check if it exists since it's already there right?
 			mBlocksX.AddValue(x);
 			mBlocksY.AddValue(y);
 
@@ -78,6 +112,42 @@ void Map::Load(const char* zon){
 			block->GenerateTerrain(mZoneData);
 
 			bbox.AddBox(block->GetBoundingBox());
+		}
+	}
+	else
+	{
+		for(int x = 31; x < 64; ++x){
+			for(int y = 31; y < 64; ++y){
+				path = String("%1\\%2_%3.HIM").arg(directory.Str()).arg(x).arg(y);
+				if(!FILE_SYS()->FileExists(path)) continue;
+				mBlocksX.AddValue(x);
+				mBlocksY.AddValue(y);
+
+				MapBlock* block = new MapBlock(mIndexBuffer);
+				mBlocks[x][y] = block;
+
+				block->SetTransform(Matrix4::CreateTranslation(Vector3(160.0f * x, 160.0f * (65-y), 0.0f)));
+				block->SetHeightmap(path);
+
+				path.Replace(path.Length() - 3, 3, "TIL");
+				block->SetTilemap(path);
+
+				path.Replace(path.Length() - 3, 3, "IFO");
+				block->SetMapInfo(path);
+
+				path = String("%1\\%2_%3\\%2_%3_PLANELIGHTINGMAP.DDS").arg(directory.Str()).arg(x).arg(y);
+				block->SetLightmap(path);
+
+				path = String("%1\\%2_%3\\LIGHTMAP\\OBJECTLIGHTMAPDATA.LIT").arg(directory.Str()).arg(x).arg(y);
+				block->SetObjectLit(path);
+
+				path = String("%1\\%2_%3\\LIGHTMAP\\BUILDINGLIGHTMAPDATA.LIT").arg(directory.Str()).arg(x).arg(y);
+				block->SetBuildingLit(path);
+
+				block->GenerateTerrain(mZoneData);
+
+				bbox.AddBox(block->GetBoundingBox());
+			}
 		}
 	}
 

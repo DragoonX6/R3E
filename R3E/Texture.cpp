@@ -24,7 +24,9 @@ bool Texture::Load(const char* pathV){
 	ILuint ilTex;
 	ilGenImages(1, &ilTex);
 	ilBindImage(ilTex);
-	File* file = FILE_SYS()->OpenFile(pathV, "rb");
+	String tmp = pathV;
+	tmp.ToUpper();
+	File* file = FILE_SYS()->OpenFile(tmp.Str(), "rb");
 	if(!file) goto loadFail;
 	long size = file->Size();
 	data = new unsigned char[size];

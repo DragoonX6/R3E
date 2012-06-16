@@ -215,42 +215,108 @@ VFSINFO *Index::GetVfsInfo(const char *filename) const
 	return NULL;
 }
 
-VFSFILE *Index::GetVfsFile(const char* filename)
+VFSFILE *Index::GetVfsFile(const char* filename) 
+	// function is too slow, trying to find a way to speed up the process
+	// function is still too slow, the cause is the map loading algorithm, 
+	// I need to find a way to check if the map is completely loaded. Or to check if it's in the map folder or not
 {
-	for(unsigned long i = 0; i < (vfscount); i++)
+	String fname = filename;
+	fname.ReplaceAll("\\\\", "\\", fname.Begin());
+	fname.ReplaceAll("/", "\\", fname.Begin());
+	unsigned long i = 0;
+	while(i < (vfscount))
 	{
 		fIndex->Seek(offset[i]);
 		fIndex->Skip((sizeof(unsigned long) * 3)); // skip vfsinfo to read fileinfo
-		for(unsigned long j = 0; j < vinfo[i]->filecount; j++)
+		bool isRoot = false;
+		if(!vfsname[i].Compare("ROOT.VFS"))
 		{
-			vfsfile = new VFSFILE;
-			vfsfile->vfs = vfsname[i].Str();
-			fIndex->Read(vfsfile->strlen);
-			vfsfile->path = new char[vfsfile->strlen];
-			fIndex->ReadData(vfsfile->path, vfsfile->strlen);
-			fIndex->Read(vfsfile->offset);
-			fIndex->Read(vfsfile->size);
-			fIndex->Read(vfsfile->blockSize);
-			fIndex->Read(vfsfile->deleted);
-			fIndex->Read(vfsfile->compressiontype);
-			fIndex->Read(vfsfile->encryptiontype);
-			fIndex->Read(vfsfile->version);
-			fIndex->Read(vfsfile->checksum);
-			String path = vfsfile->path;
-			if(!path.Compare(filename))
+			isRoot = true;
+		}
+		unsigned long j = 0;
+		while(j < vinfo[i]->filecount)
+		{
+			if(isRoot)
+				break;
+			unsigned long thisoffset = fIndex->Position();
+			unsigned short len;
+			fIndex->Read(len);
+			char* str = new char[len];
+			fIndex->ReadData(str, len);
+			fIndex->Skip(12);
+			bool del = false;
+			fIndex->Read(del);
+			fIndex->Skip(10);
+			if(!fname.Compare(str, false))
 			{
-				if(vfsfile->deleted == true)
+				if(del == true)
 				{
-					path.~String();
-					SAFE_DELETE_ARRAY(vfsfile->path);
-					SAFE_DELETE(vfsfile);
+					SAFE_DELETE_ARRAY(str);
 					continue;
 				}
+				vfsfile = new VFSFILE;
+				fIndex->Seek(thisoffset);
+				vfsfile->vfs = vfsname[i].Str();
+				fIndex->Read(vfsfile->strlen);
+				vfsfile->path = new char[vfsfile->strlen];
+				fIndex->ReadData(vfsfile->path, vfsfile->strlen);
+				fIndex->Read(vfsfile->offset); // 4
+				fIndex->Read(vfsfile->size); // 4
+				fIndex->Read(vfsfile->blockSize); // 4
+				fIndex->Read(vfsfile->deleted); // 1
+				fIndex->Read(vfsfile->compressiontype); // 1
+				fIndex->Read(vfsfile->encryptiontype); // 1
+				fIndex->Read(vfsfile->version); // 4
+				fIndex->Read(vfsfile->checksum); // 4
+				// don't mind the numbers, they're just the type sizes
 				return vfsfile;
 			}
+			SAFE_DELETE_ARRAY(str);
+			j++;
 		}
+		i++;
 	}
+	LOG("Couldn't find: %s", filename);
 	return NULL;
+}
+
+void Index::GetAllHIM(String Path, List<String> *l)
+{
+	Path.ToUpper();
+	unsigned long i = 0;
+	while(i < (vfscount))
+	{
+		fIndex->Seek(offset[i]);
+		fIndex->Skip((12)); // skip vfsinfo to read fileinfo
+		bool isRoot = false;
+		if(!vfsname[i].Compare("ROOT.VFS"))
+		{
+			isRoot = true;
+		}
+		unsigned long j = 0;
+		while(j < vinfo[i]->filecount)
+		{
+			if(isRoot)
+				break;
+			unsigned long thisoffset = fIndex->Position();
+			unsigned short len;
+			fIndex->Read(len);
+			char *tmp = new char[len];
+			fIndex->ReadData(tmp, len);
+			fIndex->Skip(12);
+			bool del = false;
+			fIndex->Read(del);
+			fIndex->Skip(10);
+			if(strstr(tmp, Path.Str()) && strstr(tmp, "HIM"))
+			{
+				if(!del)
+					&l->push_back(tmp);
+			}
+			SAFE_DELETE_ARRAY(tmp);
+			j++;
+		}
+		i++;
+	}
 }
 
 void Index::Close() const

@@ -9,6 +9,9 @@
 #include <stdio.h>
 
 #include "Index.hpp"
+#include "List.hpp"
+
+extern class VFSFileSystem *VfsSys;
 
 class VFSFileSystem : public FileSystem {
 public:
@@ -25,6 +28,8 @@ public:
 	virtual void GetFullPath(String& path);
 	void SetBaseDirectory(const char* dir);
 	const char* GetBaseDirectory();
+	void IndexGetHIM(String Path, List<String> *l);
+	static bool IsCurrentSys;
 
 private:
 	String mBaseDirectory;

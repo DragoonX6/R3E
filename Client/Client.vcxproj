@@ -155,6 +155,7 @@
     <ClInclude Include="EventQueue.hpp" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="MD5.hpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RoseConstants.hpp" />
     <ClInclude Include="RoseStructs.hpp" />
     <ClInclude Include="String.hpp" />
@@ -218,6 +219,12 @@
       <Project>{adeb3767-aebe-4ada-88dd-78e2d21f530e}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\R3E\r3e.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

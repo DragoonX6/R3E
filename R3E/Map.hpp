@@ -3,6 +3,8 @@
 
 #include "Range.hpp"
 #include "Entity.hpp"
+#include "List.hpp"
+#include "..\RECommon\TitanFileSystem.hpp"
 
 namespace ROSE {
 	class ZON;

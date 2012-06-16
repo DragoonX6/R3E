@@ -24,6 +24,7 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
+VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose\\");
 //BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){
@@ -49,15 +50,14 @@ int __cdecl main(int, char**){
 #else
 	_set_purecall_handler(purecallHandler);
 #endif
-	LOGMODE(LOG_FILE);
+	LOGMODE(LOG_CONSOLE);
 
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
 
 	//BufferedFileSystem::SetFileSystem(fs);
-	VFSFileSystem *fs = new VFSFileSystem("C:\\Program Files\\eRose\\");
-	fs->LoadIndex("data.idx");
-	VFSFileSystem::SetFileSystem(fs);
+	VfsSys->LoadIndex("data.idx");
+	VFSFileSystem::SetFileSystem(VfsSys);
 
 	gWindow->SetSize(1024, 768);
 	gWindow->SetTitle("ROSE++ by ExJam");
@@ -76,7 +76,7 @@ int __cdecl main(int, char**){
 	gWindow->SetOpenGLThread();
 
 	SAFE_DELETE(gScene);
-	SAFE_DELETE(fs);
+	SAFE_DELETE(VfsSys);
 	SAFE_DELETE(gNetwork);
 	SAFE_DELETE(gGameEvents);
 	SAFE_DELETE(gInterface);

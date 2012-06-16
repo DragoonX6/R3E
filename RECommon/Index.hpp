@@ -1,8 +1,9 @@
 #ifndef ROSE_INDEX_H
 #define ROSE_INDEX_H
 
-#include "Array.hpp"
+#include "List.hpp"
 #include "FlatFile.hpp"
+#include "Log.hpp"
 
 typedef struct
 {
@@ -46,6 +47,7 @@ public:
 	String GetVfsName(unsigned long index) const;
 	VFSINFO *GetVfsInfo(const char *filename) const;
 	VFSFILE *GetVfsFile(const char *filename);
+	void GetAllHIM(String Path, List<String> *l);
 	void Close() const;
 private:
 	unsigned long curversion;

@@ -17,6 +17,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{df4793c6-02c9-4956-887c-4311a6230a53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.hpp">
@@ -124,6 +127,9 @@
     <ClInclude Include="Window.hpp">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp">
@@ -168,5 +174,15 @@
     <ClCompile Include="Window.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\R3E\r3e.ico">
+      <Filter>Resource</Filter>
+    </None>
   </ItemGroup>
 </Project>

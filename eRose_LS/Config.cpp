@@ -3,8 +3,6 @@
 
 CConfig::CConfig(void)
 {
-	ip = new char[16];
-	memset(ip, 0, sizeof(ip));
 	password  = new char[1024];
 	memset(password, 0, sizeof(password));
 	serverport = 0;
@@ -47,22 +45,20 @@ bool CConfig::ReadIni()
 
 bool CConfig::WriteIni()
 {
-		GetDlgItemText(cfgwnd->hWindow, IDC_IPADDRESS1, ip, 16);
 		serverport = GetDlgItemInt(cfgwnd->hWindow, IDC_EDIT2, NULL, false);
 		minright = GetDlgItemInt(cfgwnd->hWindow, IDC_EDIT3, NULL, false);
 		clientport = GetDlgItemInt(cfgwnd->hWindow, IDC_EDIT4, NULL, false);
 		limituser = GetDlgItemInt(cfgwnd->hWindow, IDC_EDIT5, NULL, false);
 		GetDlgItemText(cfgwnd->hWindow, IDC_EDIT1, password, 1024);
 
-		if(!WritePrivateProfileString("Config", "DBIP", ip, "./eRose_LS.ini"))
+		char tempstr[1024];
+		memset(tempstr, 0, 1024);
+		_itoa_s(serverport, tempstr, 10);
+		if(!WritePrivateProfileString("Config", "ServerListenPort", tempstr, "./eRose_LS.ini"))
 		{
 			MessageBox(NULL, "Error writing to Erose_LS.ini", "Error", MB_ICONERROR | MB_OK);
 			return false;
 		}
-		char tempstr[1024];
-		memset(tempstr, 0, 1024);
-		_itoa_s(serverport, tempstr, 10);
-		WritePrivateProfileString("Config", "ServerListenPort", tempstr, "./eRose_LS.ini");
 		memset(tempstr, 0, 1024);
 		_itoa_s(minright, tempstr, 10);
 		WritePrivateProfileString("Config", "LoginRight", tempstr, "./eRose_LS.ini");
