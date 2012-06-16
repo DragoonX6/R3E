@@ -76,8 +76,8 @@ File* VFSFileSystem::OpenFile(const char* path, const char* /*mode*/, bool /*dat
 	file->ReadVFSData(buffer, entry->size);
 	file->SetData(buffer, entry->size);
 	file->CloseVFS();
-	SAFE_DELETE(entry);
-	SAFE_DELETE_ARRAY(buffer);
+	//SAFE_DELETE(entry);
+	//SAFE_DELETE_ARRAY(buffer);
 	return file;
 }
 

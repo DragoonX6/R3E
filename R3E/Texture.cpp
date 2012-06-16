@@ -47,6 +47,8 @@ bool Texture::Load(const char* pathV){
 
 	LOG("Loaded: '%s' W: %u H: %u", pathV, mWidth, mHeight);
 
+	Create(pathV);
+
 	return true;
 
 loadFail:

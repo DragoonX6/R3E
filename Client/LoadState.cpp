@@ -11,6 +11,7 @@
 #include "..\R3E\MapManager.hpp"
 #include "..\R3E\SceneManager.hpp"
 #include "..\R3E\STB.hpp"
+#include "..\RGE\Image.hpp"
 
 LoadState::LoadState(int map){
 	mLoadMap = map;
@@ -59,7 +60,9 @@ int LoadState::Run(){
 		if(sFirstLoad)
 		{
 			if(!ldscreen.Load("3DDATA\\CONTROL\\RES\\r3elogo.png"))
+			{
 				ldscreen.Load("3DDATA\\CONTROL\\RES\\EXUI1.DDS");
+			}
 			break;
 		}
 		else
@@ -79,29 +82,33 @@ int LoadState::Run(){
 		}
 	}
 
-	glMatrixMode (GL_MODELVIEW);
-	glPushMatrix ();
-	glLoadIdentity ();
-	glMatrixMode (GL_PROJECTION);
-	glPushMatrix ();
-	glLoadIdentity ();
-
-	glBegin (GL_QUADS);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-	glEnd ();
-
-	glPopMatrix ();
-	glMatrixMode (GL_MODELVIEW);
-	glPopMatrix ();
-	
-	gWindow->SwapBuffers();
-
 	if(sFirstLoad){
 		gScene->Init();
+	}
 
+	gScene->BeginScene();
+	gScene->RenderScene();
+	gScene->EndScene();
+
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	gScene->Begin2D();
+	IImage *screen = new IImage(ldscreen);
+	UiRender *ren = new UiRender();
+	int x = (gWindow->Width()/2)-(ldscreen.GetWidth()/2);
+	int y = (gWindow->Height()/2)-(ldscreen.GetHeight()/2);
+	ren->PushTranslate(x, y);
+	ren->DrawImage(screen, 0, 0, ldscreen.GetWidth(), ldscreen.GetHeight(), ldscreen.GetWidth(), ldscreen.GetHeight());
+	// we dont have to pop
+	gScene->End2D();
+
+	gScene->UpdateScene();
+
+	gWindow->SwapBuffers();
+
+	if(sFirstLoad)
+	{
 		ROSE::Data::Load();
 		GameFonts::Load();
 		gInterface->Init();

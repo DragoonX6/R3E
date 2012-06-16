@@ -80,7 +80,7 @@ public:
 
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClearDepth(1.0f);
 
 		ClientActiveTexture(GL_TEXTURE0_ARB);

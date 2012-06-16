@@ -13,7 +13,7 @@ public:
 	int Run();
 	void Stop();
 	int HandleEvent(NetworkEvent* evt);
-	MSSQL *sql;
 private:
 	bool isRunning;
+	MSSQL *sql;
 };
