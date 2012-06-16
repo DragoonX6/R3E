@@ -5,9 +5,6 @@
 #include <CommCtrl.h>
 //#include <tchar.h>
 #include <string.h>
-#include <sql.h>
-#include <sqltypes.h>
-#include <sqlext.h>
 #include "resource.h"
 #include "MSSQL.h"
 #include "..\RECommon\SafeDelete.hpp"

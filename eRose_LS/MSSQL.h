@@ -1,6 +1,9 @@
 #pragma once
 
-#include "stdafx.h"
+#include <Windows.h>
+#include <sql.h>
+#include <sqltypes.h>
+#include <sqlext.h>
 
 class MSSQL
 {
@@ -12,5 +15,5 @@ public:
 	SQLRETURN ExecuteQuery(SQLCHAR* Query);
 	void ReadData(SQLCHAR* Buffer, int size, SQLCHAR* Query);
 private:
-	HANDLE sqlenv, sqlconn, sqlstatement;
+	HANDLE sqlconn, sqlenv, sqlstatement;
 };
