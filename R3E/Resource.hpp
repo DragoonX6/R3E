@@ -13,6 +13,11 @@ public:
 		mResourcePath = path;
 	}
 
+	String GetResourcePath()
+	{
+		return mResourcePath;
+	}
+
 	virtual void Destroy(){
 		Unload();
 		mResourceLoaded = false;

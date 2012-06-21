@@ -9,7 +9,8 @@
 #include <stdio.h>
 
 #include "Index.hpp"
-#include "List.hpp"
+#include <vector>
+#include <cassert>
 
 extern class VFSFileSystem *VfsSys;
 
@@ -28,12 +29,15 @@ public:
 	virtual void GetFullPath(String& path);
 	void SetBaseDirectory(const char* dir);
 	const char* GetBaseDirectory();
-	void IndexGetHIM(String Path, List<String> *l);
+	void PreLoad();
+	void GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l);
+	void ClearBatchBuffer();
 	static bool IsCurrentSys;
 
 private:
 	String mBaseDirectory;
 	Index mIndex;
+	std::vector<VFSFILE> Filebuff;
 };
 
 #endif

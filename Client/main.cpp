@@ -4,6 +4,7 @@
 #include "..\RNE\NetworkManager.hpp"
 //#include "..\RECommon\BufferedFileSystem.hpp"
 #include "..\RECommon\TitanFileSystem.hpp"
+#include "..\RECommon\FlatFileSystem.hpp"
 
 #include "Player.hpp"
 #include "Window.hpp"
@@ -24,7 +25,8 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
-VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose");
+//VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose");
+VFSFileSystem* VfsSys = new VFSFileSystem();
 //BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){
@@ -56,8 +58,11 @@ int __cdecl main(int, char**){
 	//FileSystem::SetFileSystem(fs);
 
 	//BufferedFileSystem::SetFileSystem(fs);
-	VfsSys->LoadIndex("data.idx");
-	VFSFileSystem::SetFileSystem(VfsSys);
+	//VfsSys->LoadIndex("data.idx");
+	//VFSFileSystem::SetFileSystem(VfsSys);
+
+	FlatFileSystem* fs = new FlatFileSystem("C:\\Program Files\\eRose\\Demo ExtractFile\\");
+	FlatFileSystem::SetFileSystem(fs);
 
 	gWindow->SetSize(1024, 768);
 	gWindow->SetTitle("ROSE++ by ExJam");
@@ -76,7 +81,7 @@ int __cdecl main(int, char**){
 	gWindow->SetOpenGLThread();
 
 	SAFE_DELETE(gScene);
-	SAFE_DELETE(VfsSys);
+	//SAFE_DELETE(VfsSys);
 	SAFE_DELETE(gNetwork);
 	SAFE_DELETE(gGameEvents);
 	SAFE_DELETE(gInterface);

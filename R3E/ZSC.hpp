@@ -256,6 +256,7 @@ namespace ROSE {
 
 			EntityGroup* group = new EntityGroup();
 			group->SetID(index);
+			bool zms = false;
 			for(unsigned int i = 0; i < model->mPartList.Size(); ++i){
 				T* entity = new T();
 

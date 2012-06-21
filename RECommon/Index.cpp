@@ -280,9 +280,9 @@ VFSFILE *Index::GetVfsFile(const char* filename)
 	return NULL;
 }
 
-void Index::GetAllHIM(String Path, List<String> *l)
+void Index::GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l)
 {
-	Path.ToUpper();
+	directory.ReplaceAll("/", "\\");
 	unsigned long i = 0;
 	while(i < (vfscount))
 	{
@@ -307,10 +307,77 @@ void Index::GetAllHIM(String Path, List<String> *l)
 			bool del = false;
 			fIndex->Read(del);
 			fIndex->Skip(10);
-			if(strstr(tmp, Path.Str()) && strstr(tmp, "HIM"))
+			if(strstr(tmp, directory.Str()) && strstr(tmp, ext.Str()))
 			{
 				if(!del)
-					&l->push_back(tmp);
+				{
+					VFSFILE vfs;
+					fIndex->Seek(thisoffset);
+					vfs.vfs = vfsname[i].Str();
+					fIndex->Read(vfs.strlen);
+					vfs.path = new char[vfs.strlen];
+					fIndex->ReadData(vfs.path, vfs.strlen);
+					fIndex->Read(vfs.offset); // 4
+					fIndex->Read(vfs.size); // 4
+					fIndex->Read(vfs.blockSize); // 4
+					fIndex->Read(vfs.deleted); // 1
+					fIndex->Read(vfs.compressiontype); // 1
+					fIndex->Read(vfs.encryptiontype); // 1
+					fIndex->Read(vfs.version); // 4
+					fIndex->Read(vfs.checksum); // 4
+					l->push_back(vfs);
+				}
+			}
+			SAFE_DELETE_ARRAY(tmp);
+			j++;
+		}
+		i++;
+	}
+}
+
+void Index::GetAllVfsFiles(std::vector<VFSFILE> *l)
+{
+	unsigned long i = 0;
+	while(i < (vfscount))
+	{
+		fIndex->Seek(offset[i]);
+		fIndex->Skip((12)); // skip vfsinfo to read fileinfo
+		bool isRoot = false;
+		if(!vfsname[i].Compare("ROOT.VFS"))
+		{
+			isRoot = true;
+		}
+		unsigned long j = 0;
+		while(j < vinfo[i]->filecount)
+		{
+			if(isRoot)
+				break;
+			unsigned long thisoffset = fIndex->Position();
+			unsigned short len;
+			fIndex->Read(len);
+			char *tmp = new char[len];
+			fIndex->ReadData(tmp, len);
+			fIndex->Skip(12);
+			bool del = false;
+			fIndex->Read(del);
+			fIndex->Skip(10);
+			if(!del)
+			{
+				VFSFILE vfs;
+				fIndex->Seek(thisoffset);
+				vfs.vfs = vfsname[i].Str();
+				fIndex->Read(vfs.strlen);
+				vfs.path = new char[vfs.strlen];
+				fIndex->ReadData(vfs.path, vfs.strlen);
+				fIndex->Read(vfs.offset); // 4
+				fIndex->Read(vfs.size); // 4
+				fIndex->Read(vfs.blockSize); // 4
+				fIndex->Read(vfs.deleted); // 1
+				fIndex->Read(vfs.compressiontype); // 1
+				fIndex->Read(vfs.encryptiontype); // 1
+				fIndex->Read(vfs.version); // 4
+				fIndex->Read(vfs.checksum); // 4
+				l->push_back(vfs);
 			}
 			SAFE_DELETE_ARRAY(tmp);
 			j++;

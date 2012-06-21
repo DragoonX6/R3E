@@ -12,6 +12,7 @@
 #include "..\R3E\SceneManager.hpp"
 #include "..\R3E\STB.hpp"
 #include "..\RGE\Image.hpp"
+#include "..\RECommon\TitanFileSystem.hpp"
 
 LoadState::LoadState(int map){
 	mLoadMap = map;
@@ -109,6 +110,11 @@ int LoadState::Run(){
 
 	if(sFirstLoad)
 	{
+		if(VFSFileSystem::IsCurrentSys)
+		{
+			LOG("Preloading files, please wait");
+			VfsSys->PreLoad();
+		}
 		ROSE::Data::Load();
 		GameFonts::Load();
 		gInterface->Init();

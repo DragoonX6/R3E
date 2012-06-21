@@ -10,6 +10,7 @@
 #include "VertexTypes.hpp"
 #include "IndexBuffer.hpp"
 #include "VertexBuffer.hpp"
+#include "..\RECommon\TitanFileSystem.hpp"
 
 MapBlock::MapBlock(IIndexBuffer* iBuffer)
 	: mHeightmap(0), mBuildingLit(0), mObjectLit(0), mMapInfo(0), mTilemap(0), mVertexBuffer(0), mIndexBuffer(iBuffer), mQuadTree(4)
@@ -153,7 +154,7 @@ void MapBlock::GenerateTerrain(ROSE::ZON* zon){
 				}
 			}
 
-			
+
 			BoundingBox bbox;
 			bbox.mMin = Vector3(float(ix * 4) * 2.5f, -(float((iy * 4) + 4) * 2.5f), patchHeight.mMin);
 			bbox.mMax = Vector3((float(ix * 4) + 4) * 2.5f, -(float(iy * 4) * 2.5f), patchHeight.mMax);

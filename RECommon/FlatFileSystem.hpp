@@ -5,6 +5,7 @@
 #include "FileSystem.hpp"
 
 #include "FlatFile.hpp"
+#include "Log.hpp"
 
 class FlatFileSystem : public FileSystem {
 public:

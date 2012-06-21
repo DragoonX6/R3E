@@ -1,6 +1,7 @@
 #include "Global.h"
 
 #include "ItemManager.hpp"
+#include "..\RECommon\TitanFileSystem.hpp"
 
 ItemManager ItemManager::mInstance;
 
