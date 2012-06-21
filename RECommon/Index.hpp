@@ -1,7 +1,7 @@
 #ifndef ROSE_INDEX_H
 #define ROSE_INDEX_H
 
-#include "List.hpp"
+#include <vector>
 #include "FlatFile.hpp"
 #include "Log.hpp"
 
@@ -47,7 +47,8 @@ public:
 	String GetVfsName(unsigned long index) const;
 	VFSINFO *GetVfsInfo(const char *filename) const;
 	VFSFILE *GetVfsFile(const char *filename);
-	void GetAllHIM(String Path, List<String> *l);
+	void GetAllVfsFiles(std::vector<VFSFILE> *l);
+	void GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l);
 	void Close() const;
 private:
 	unsigned long curversion;

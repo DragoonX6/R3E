@@ -17,7 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	hWindow = CreateDialog(ghInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, MainDlg);
 	if (hWindow == 0) {
 		char buf[100];
-		sprintf(buf, "Error 0x%x", GetLastError());
+		sprintf_s(buf, "Error 0x%x", GetLastError());
 		MessageBox(0, buf, "CreateDialog", MB_ICONEXCLAMATION | MB_OK);
 		return 1;
 	}
