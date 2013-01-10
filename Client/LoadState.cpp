@@ -110,11 +110,11 @@ int LoadState::Run(){
 
 	if(sFirstLoad)
 	{
-		if(VFSFileSystem::IsCurrentSys)
+		/*if(VFSFileSystem::IsCurrentSys)
 		{
 			LOG("Preloading files, please wait");
 			VfsSys->PreLoad();
-		}
+		}*/
 		ROSE::Data::Load();
 		GameFonts::Load();
 		gInterface->Init();

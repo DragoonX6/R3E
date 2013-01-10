@@ -5,7 +5,7 @@ VFSFileSystem::VFSFileSystem()
 }
 VFSFileSystem::VFSFileSystem(const char* baseDir){
 	SetBaseDirectory(baseDir);
-	IsCurrentSys = true;
+	//IsCurrentSys = true;
 }
 
 VFSFileSystem::~VFSFileSystem()
@@ -16,7 +16,7 @@ VFSFileSystem::~VFSFileSystem()
 bool VFSFileSystem::LoadIndex(const char* path){
 	String realpath = path;
 	GetFullPath(realpath);
-	return mIndex.Load(realpath);
+	return mIndex.Load(realpath, FileEntry, FileTbl);
 }
 
 File* VFSFileSystem::OpenFile(const char* path, const char* /*mode*/, bool /*dataFile = true*/, bool /*showError = true*/)
@@ -24,39 +24,49 @@ File* VFSFileSystem::OpenFile(const char* path, const char* /*mode*/, bool /*dat
 	// We do a different loading from here, we are loading from defragmented vfs so the root files are loaded from root.vfs
 	VFSFILE* entry = new VFSFILE;
 	{
-		if(Filebuff.size() != 0) // Try to find the file in the list buffer, this is faster then looking in the vfs this mainly used for loading maps quicker
+		if(FileEntry.size() != 0) // Try to find the file in the list buffer, this is faster then looking in the vfs this mainly used for loading maps quicker
 		{
-			for(unsigned int i = 0; i < Filebuff.size(); ++i)
+			std::string name(path);
+			std::replace(name.begin(), name.end(), '/', '\\');
+			if(name.find("\\\\") != (-1))
 			{
-				String tmp = Filebuff[i].path;
-				if(!tmp.Compare(path, false))
+				for(;name.find("\\\\") != (-1);)
 				{
-					FlatFile* file = new FlatFile(tmp, "rb");
+					int off = name.find("\\\\");
+					name.erase(off+1, 1);
+				}
+			}
+			char* normalizedpath = (char*)name.c_str();
+			if(FileTbl.getHash(toHash(normalizedpath), &entry))
+			{
+				goto loadfromvfs;
+			}
+			else
+			{
+				String tmp = normalizedpath;
+				FlatFile* file = new FlatFile(tmp, "rb");
+				if(!file->IsOpen())
+				{
+					GetFullPath(tmp);
+					file->Open(tmp, "rb");
 					if(!file->IsOpen())
 					{
-						String tmp2 = tmp;
-						GetFullPath(tmp2);
-						file->Open(tmp2, "rb");
-						if(!file->IsOpen())
-						{
-							SAFE_DELETE(file);
-							entry = &Filebuff[i];
-							goto loadfromvfs;
-						}
-						else
-						{
-							return file;
-						}
+						SAFE_DELETE(file);
+						return 0;
 					}
 					else
 					{
 						return file;
 					}
 				}
+				else
+				{
+					return file;
+				}
 			}
 			return 0;
 		}
-		if(Filebuff.size() == 0)
+		if(FileEntry.size() == 0)
 		{
 			String tmp = path;
 			FlatFile* file = new FlatFile(tmp, "rb");
@@ -130,27 +140,4 @@ const char* VFSFileSystem::GetBaseDirectory(){
 	return mBaseDirectory;
 }
 
-void VFSFileSystem::PreLoad()
-{
-	mIndex.GetAllVfsFiles(&Filebuff);
-}
-
-void VFSFileSystem::GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l)
-{
-	directory.ReplaceAll("/", "\\");
-	directory.ToUpper();
-	for(unsigned int i = 0; i < Filebuff.size(); ++i)
-	{
-		if(strstr(Filebuff[i].path, directory.Str()) && strstr(Filebuff[i].path, ext.Str()))
-		{
-			l->push_back(Filebuff[i]);
-		}
-	}
-}
-
-void VFSFileSystem::ClearBatchBuffer()
-{
-	Filebuff.clear();
-}
-
-bool VFSFileSystem::IsCurrentSys = false;
+//bool VFSFileSystem::IsCurrentSys = false;

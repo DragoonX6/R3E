@@ -132,6 +132,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hashtable.cpp" />
     <ClCompile Include="Index.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MD5.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="TitanFileSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Hashtable.h" />
     <ClInclude Include="Index.hpp" />
     <ClInclude Include="Log.hpp" />
     <ClInclude Include="CriticalSection.hpp" />
