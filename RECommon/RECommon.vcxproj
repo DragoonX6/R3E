@@ -106,6 +106,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <AdditionalIncludeDirectories>..\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release + Debug Info|Win32'">

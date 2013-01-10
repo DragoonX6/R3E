@@ -106,9 +106,10 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <AdditionalIncludeDirectories>..\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>ticpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\ticpp\lib\ticpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Libraries\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>

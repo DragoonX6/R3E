@@ -110,9 +110,10 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <AdditionalIncludeDirectories>..\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ws2_32.lib;..\Release\RNE.lib;..\Release\R3E.lib;..\Release\RGE.lib;..\Release\RECommon.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;..\Release\RNE.lib;..\Release\R3E.lib;..\Release\RGE.lib;..\Release\RECommon.lib;..\ticpp\lib\ticpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>

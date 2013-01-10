@@ -56,7 +56,7 @@ int __cdecl main(int, char**){
 	//FileSystem::SetFileSystem(fs);
 
 	//BufferedFileSystem::SetFileSystem(fs);
-	VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files (x86)\\Ruff-Rose");
+	VFSFileSystem *VfsSys = new VFSFileSystem(".");
 	VfsSys->LoadIndex("data.idx");
 	VFSFileSystem::SetFileSystem(VfsSys);
 
