@@ -52,7 +52,7 @@ void Map::Load(const char* zon){
 	BoundingBox bbox;
 	String path;
 	// List all the HIM Files and load one by one. This is faster then looking for them in a loop.
-	if(VFSFileSystem::IsCurrentSys)
+	/*if(VFSFileSystem::IsCurrentSys)
 	{
 		std::vector<VFSFILE> HIM;
 		VfsSys->GetBatchFiles(directory, String("HIM"), &HIM);
@@ -115,7 +115,7 @@ void Map::Load(const char* zon){
 			bbox.AddBox(block->GetBoundingBox());
 		}
 		HIM.clear();
-	}
+	}*/
 	for(int x = 30; x < 64; ++x){
 		for(int y = 30; y < 64; ++y){
 			path = String("%1\\%2_%3.HIM").arg(directory.Str()).arg(x).arg(y);

@@ -25,8 +25,6 @@ GameEvents* gGameEvents = new GameEvents();
 UserInterface* gInterface = new UserInterface();
 StateManager* gStateManager = new StateManager();
 CharacterList* gCharacterList = new CharacterList();
-//VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files\\eRose");
-VFSFileSystem* VfsSys = new VFSFileSystem();
 //BufferedFileSystem *fs = new BufferedFileSystem("C:\\Rose Servers\\SHO\\srvData\\");
 
 DWORD WINAPI StateManRun(LPVOID /*param*/){
@@ -52,17 +50,18 @@ int __cdecl main(int, char**){
 #else
 	_set_purecall_handler(purecallHandler);
 #endif
-	LOGMODE(LOG_CONSOLE);
+	LOGMODE(LOG_FILE);
 
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
 
 	//BufferedFileSystem::SetFileSystem(fs);
-	//VfsSys->LoadIndex("data.idx");
-	//VFSFileSystem::SetFileSystem(VfsSys);
+	VFSFileSystem *VfsSys = new VFSFileSystem("C:\\Program Files (x86)\\Ruff-Rose");
+	VfsSys->LoadIndex("data.idx");
+	VFSFileSystem::SetFileSystem(VfsSys);
 
-	FlatFileSystem* fs = new FlatFileSystem("C:\\Program Files\\eRose\\Demo ExtractFile\\");
-	FlatFileSystem::SetFileSystem(fs);
+	/*FlatFileSystem* fs = new FlatFileSystem("C:\\Program Files\\eRose\\Demo ExtractFile\\");
+	FlatFileSystem::SetFileSystem(fs);*/
 
 	gWindow->SetSize(1024, 768);
 	gWindow->SetTitle("ROSE++ by ExJam");

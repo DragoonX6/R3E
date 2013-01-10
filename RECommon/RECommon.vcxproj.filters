@@ -40,6 +40,9 @@
     <ClCompile Include="TitanFileSystem.cpp">
       <Filter>File</Filter>
     </ClCompile>
+    <ClCompile Include="hashtable.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Log.hpp">
@@ -114,9 +117,6 @@
     <ClInclude Include="FastStringMapL2.hpp">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Hash.hpp">
-      <Filter>Containers</Filter>
-    </ClInclude>
     <ClInclude Include="List.hpp">
       <Filter>Containers</Filter>
     </ClInclude>
@@ -146,6 +146,12 @@
     </ClInclude>
     <ClInclude Include="Index.hpp">
       <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.hpp">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashtable.h">
+      <Filter>Containers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
