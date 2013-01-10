@@ -9,8 +9,10 @@
 #include <stdio.h>
 
 #include "Index.hpp"
+#include "Hashtable.h"
 #include <vector>
 #include <cassert>
+#include <algorithm>
 
 extern class VFSFileSystem *VfsSys;
 
@@ -30,14 +32,12 @@ public:
 	void SetBaseDirectory(const char* dir);
 	const char* GetBaseDirectory();
 	void PreLoad();
-	void GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l);
-	void ClearBatchBuffer();
-	static bool IsCurrentSys;
 
 private:
 	String mBaseDirectory;
 	Index mIndex;
-	std::vector<VFSFILE> Filebuff;
+	std::vector<VFSFILE*> FileEntry;
+	CHashTable<VFSFILE*> FileTbl;
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <vector>
 #include "FlatFile.hpp"
 #include "Log.hpp"
+#include "Hashtable.h"
 
 typedef struct
 {
@@ -30,23 +31,15 @@ class Index
 {
 public:
 	Index();
-	Index(const char* path);
+	//Index(const char* path);
 	~Index();
-	bool Load(const char* path);
-	//bool New(const char* path);
-	/*void WriteBaseVersion(unsigned long ver);
-	void WriteCurrentVersion(unsigned long ver);
-	void WriteVFSCount(unsigned long cnt);
-	void WriteVFSName(String name, unsigned long num);
-	void WriteVFSInfo(VFSINFO* Info);
-	void WriteVFSFile(VFSFILE* file);*/
+	bool Load(const char *path, std::vector<VFSFILE*> &Entry, CHashTable<VFSFILE*> &Table);
 	unsigned long GetBaseVersion() const;
 	unsigned long GetCurrentVersion() const;
 	unsigned long VfsCount() const;
 	unsigned long GetVfsOffet(unsigned long index) const;
 	String GetVfsName(unsigned long index) const;
 	VFSINFO *GetVfsInfo(const char *filename) const;
-	VFSFILE *GetVfsFile(const char *filename);
 	void GetAllVfsFiles(std::vector<VFSFILE> *l);
 	void GetBatchFiles(String directory, String ext, std::vector<VFSFILE> *l);
 	void Close() const;
