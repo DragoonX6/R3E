@@ -50,7 +50,7 @@ int __cdecl main(int, char**){
 #else
 	_set_purecall_handler(purecallHandler);
 #endif
-	LOGMODE(LOG_FILE);
+	LOGMODE(LOG_CONSOLE);
 
 	//TitanFileSystem* fs = new TitanFileSystem("E:\\rose servers\\SHO\\srvDATA\\");	
 	//FileSystem::SetFileSystem(fs);
