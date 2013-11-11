@@ -1,0 +1,6 @@
+*.sdf
+*.suo
+
+[Rr]elease
+[Dd]ebug
+ipch
